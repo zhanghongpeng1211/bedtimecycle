@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jet Lag Adjustor | Bedtime Cycle</title>
+<meta name="description" content="Plan your gradual schedule shift before cross-timezone travel. Export your adjustment plan to your calendar. Beat jet lag with science.">
+<link rel="stylesheet" href="../style.css">
+<link rel="canonical" href="https://bedtimecycle.com/tools/jet-lag-adjustor.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a237e'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>Z</text></svg>">
+
+<meta property="og:title" content="Jet Lag Adjustor | Bedtime Cycle">
+<meta property="og:description" content="Plan your gradual schedule shift before cross-timezone travel.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bedtimecycle.com/tools/jet-lag-adjustor.html">
+<meta property="og:image" content="https://bedtimecycle.com/images/og-default.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Jet Lag Adjustor",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bedtimecycle.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://bedtimecycle.com/tools/"},
+    {"@type": "ListItem", "position": 3, "name": "Jet Lag Adjustor", "item": "https://bedtimecycle.com/tools/jet-lag-adjustor.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="btc-nav">
+  <div class="btc-nav-inner">
+    <a href="../index.html" class="btc-logo"><span class="btc-logo-icon">Z</span>Bedtime Cycle</a>
+    <button class="btc-nav-toggle" onclick="document.querySelector('.btc-nav-links').classList.toggle('btc-mobile-open')" aria-label="Toggle menu">☰</button>
+    <ul class="btc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<nav class="btc-breadcrumb" aria-label="Breadcrumb">
+  <a href="../index.html">Home</a><span class="btc-breadcrumb-sep">/</span><a href="./index.html">Tools</a><span class="btc-breadcrumb-sep">/</span><span>Jet Lag Adjustor</span>
+</nav>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_top"><span>Advertisement - tool_top</span></div>
+
+
+<div class="btc-tool-page">
+  <div class="btc-tool-header">
+    <h1>✈️ Jet Lag Adjustor</h1>
+    <p>Plan your gradual schedule shift before cross-timezone travel. Export the plan to your calendar. Beat jet lag with circadian science.</p>
+  </div>
+
+  <div class="btc-tool-box">
+    <div class="btc-input-group">
+      <label for="departureZone">Departure Timezone</label>
+      <select id="departureZone">
+        <option value="-8">Pacific Time (Los Angeles, Seattle)</option>
+        <option value="-7">Mountain Time (Denver, Phoenix)</option>
+        <option value="-6" selected>Central Time (Chicago, Dallas)</option>
+        <option value="-5">Eastern Time (New York, Miami)</option>
+        <option value="0">GMT (London, Lisbon)</option>
+        <option value="1">Central European (Paris, Berlin)</option>
+        <option value="8">China Standard (Beijing, Shanghai)</option>
+        <option value="9">Japan Standard (Tokyo, Osaka)</option>
+      </select>
+    </div>
+    <div class="btc-input-group">
+      <label for="arrivalZone">Arrival Timezone</label>
+      <select id="arrivalZone">
+        <option value="-8">Pacific Time (Los Angeles, Seattle)</option>
+        <option value="-7">Mountain Time (Denver, Phoenix)</option>
+        <option value="-6">Central Time (Chicago, Dallas)</option>
+        <option value="-5" selected>Eastern Time (New York, Miami)</option>
+        <option value="0">GMT (London, Lisbon)</option>
+        <option value="1">Central European (Paris, Berlin)</option>
+        <option value="8">China Standard (Beijing, Shanghai)</option>
+        <option value="9">Japan Standard (Tokyo, Osaka)</option>
+      </select>
+    </div>
+    <div class="btc-input-group">
+      <label for="currentBedtime">Current Bedtime</label>
+      <input type="time" id="currentBedtime" value="22:30">
+    </div>
+    <div class="btc-input-group">
+      <label for="currentWake">Current Wake Time</label>
+      <input type="time" id="currentWake" value="06:30">
+    </div>
+    <div class="btc-input-group">
+      <label for="travelDate">Travel Date</label>
+      <input type="date" id="travelDate">
+    </div>
+    <div class="btc-input-group">
+      <label for="adjustDays">Days to Adjust Before Travel</label>
+      <select id="adjustDays">
+        <option value="3">3 days (minimal)</option>
+        <option value="5" selected>5 days (recommended)</option>
+        <option value="7">7 days (aggressive)</option>
+      </select>
+    </div>
+    <button class="btc-calculate-btn" onclick="generatePlan()">Generate Adjustment Plan</button>
+    <button class="btc-reset-btn" onclick="resetAdjustor()">Reset</button>
+  </div>
+
+  <div class="btc-result-box" id="resultBox">
+    <h4>Your Jet Lag Adjustment Plan</h4>
+    <div id="adjustResults"></div>
+    <div class="btc-chart-container">
+      <canvas id="adjustChart"></canvas>
+    </div>
+    <div style="margin-top: 20px;">
+      <button class="btc-export-btn" onclick="exportPlan()">📥 Export Plan</button>
+      <button class="btc-export-btn" onclick="exportCalendar()" style="margin-left: 8px;">📅 Export to Calendar</button>
+    </div>
+  </div>
+</div>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_middle"><span>Advertisement - tool_middle</span></div>
+
+
+<section class="btc-section" style="padding-top: 0;">
+  <div class="btc-container" style="max-width: 800px;">
+    <div class="btc-tool-info">
+      <h2>How It Works</h2>
+      <p>The Jet Lag Adjustor is based on circadian rhythm research from the Sleep Research Society:</p>
+      <ol>
+        <li><strong>Timezone delta:</strong> We calculate the hour difference between your departure and arrival zones. Eastward travel (losing hours) is harder than westward (gaining hours).</li>
+        <li><strong>Pre-shift schedule:</strong> Starting 3–7 days before travel, we gradually shift your bedtime and wake time toward destination time. The shift is proportional: 1 hour per day for eastward, 1.5 hours for westward.</li>
+        <li><strong>Light exposure guidance:</strong> Morning light advances your clock (good for eastward); evening light delays it (good for westward). The plan includes specific light timing.</li>
+        <li><strong>Meal timing:</strong> Your gut has its own circadian clock. We shift meal times alongside sleep to reinforce the rhythm change.</li>
+      </ol>
+      <p><strong>Export feature:</strong> The calendar export generates a standard .ics file compatible with Google Calendar, Outlook, and Apple Calendar. Each event includes your target bedtime and wake time for that day.</p>
+    </div>
+  </div>
+</section>
+
+<section class="btc-section" style="padding-top: 0;">
+  <div class="btc-container">
+    <div class="btc-post-footer-grid">
+      <div>
+        <h3>Related Articles</h3>
+        <a href="../blog/how-to-shift-your-bedtime-by-2-hours.html" class="btc-related-card">
+          <h4>How to Shift Your Bedtime by 2 Hours</h4>
+          <p>The 15-minute rule. Shift gradually, not overnight.</p>
+        </a>
+        <a href="../blog/circadian-rhythm-vs-sleep-homeostasis.html" class="btc-related-card">
+          <h4>Circadian Rhythm vs. Sleep Homeostasis</h4>
+          <p>The two forces fighting inside you.</p>
+        </a>
+      </div>
+      <div>
+        <h3>Recommended Tools</h3>
+        <a href="./sleep-cycle-calculator.html" class="btc-related-card">
+          <h4>🌙 Sleep Cycle Calculator</h4>
+          <p>Calculate optimal bedtimes based on 90-minute cycles.</p>
+        </a>
+        <a href="./bedtime-finder.html" class="btc-related-card">
+          <h4>🕐 Bedtime Finder</h4>
+          <p>Find your ideal bedtime based on current habits.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_bottom"><span>Advertisement - tool_bottom</span></div>
+
+
+<footer class="btc-footer">
+  <div class="btc-footer-grid">
+    <div><div class="btc-footer-brand">Bedtime Cycle</div><p class="btc-footer-desc">Science-backed sleep tools built by Dr. Sarah Mitchell in Boulder, Colorado.</p></div>
+    <div><h4>Tools</h4><ul><li><a href="./sleep-cycle-calculator.html">Sleep Cycle Calculator</a></li><li><a href="./jet-lag-adjustor.html">Jet Lag Adjustor</a></li><li><a href="./bedtime-finder.html">Bedtime Finder</a></li></ul></div>
+    <div><h4>Site</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li></ul></div>
+    <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+  </div>
+  <div class="btc-footer-bottom"><p>&copy; 2026 Bedtime Cycle. All rights reserved.</p></div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+// Set default travel date to 7 days from now
+document.getElementById('travelDate').value = new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0];
+
+function generatePlan() {
+  const depZone = parseInt(document.getElementById('departureZone').value);
+  const arrZone = parseInt(document.getElementById('arrivalZone').value);
+  const currentBedtime = document.getElementById('currentBedtime').value;
+  const currentWake = document.getElementById('currentWake').value;
+  const travelDate = document.getElementById('travelDate').value;
+  const adjustDays = parseInt(document.getElementById('adjustDays').value);
+
+  if (!currentBedtime || !currentWake || !travelDate) { alert('Please fill in all fields'); return; }
+
+  const hourDiff = arrZone - depZone;
+  const [btHour, btMin] = currentBedtime.split(':').map(Number);
+  const [wtHour, wtMin] = currentWake.split(':').map(Number);
+  const currentBedMin = btHour * 60 + btMin;
+  const currentWakeMin = wtHour * 60 + wtMin;
+
+  // Target times in departure timezone
+  const targetBedMin = (currentBedMin - hourDiff * 60 + 24 * 60) % (24 * 60);
+  const targetWakeMin = (currentWakeMin - hourDiff * 60 + 24 * 60) % (24 * 60);
+
+  const bedShift = targetBedMin - currentBedMin;
+  const wakeShift = targetWakeMin - currentWakeMin;
+  const bedShiftPerDay = bedShift / adjustDays;
+  const wakeShiftPerDay = wakeShift / adjustDays;
+
+  let html = '<div style="background: var(--btc-accent-bg); border: 1px solid var(--btc-accent); border-radius: var(--btc-radius); padding: 20px; margin-bottom: 20px;">';
+  html += '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px;">';
+  html += '<div><strong style="color: var(--btc-primary);">Timezone Change:</strong><br>' + (hourDiff > 0 ? '+' : '') + hourDiff + ' hours</div>';
+  html += '<div><strong style="color: var(--btc-primary);">Travel Date:</strong><br>' + travelDate + '</div>';
+  html += '</div>';
+  html += '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">';
+  html += '<div><strong style="color: var(--btc-primary);">Target Bedtime:</strong><br>' + formatTime(targetBedMin) + ' (departure time)</div>';
+  html += '<div><strong style="color: var(--btc-primary);">Target Wake Time:</strong><br>' + formatTime(targetWakeMin) + ' (departure time)</div>';
+  html += '</div></div>';
+
+  html += '<h4 style="margin-bottom: 12px;">' + adjustDays + '-Day Adjustment Plan</h4>';
+  html += '<div style="display: grid; gap: 8px;">';
+
+  const travelDateObj = new Date(travelDate);
+  for (let day = 1; day <= adjustDays; day++) {
+    const date = new Date(travelDateObj);
+    date.setDate(date.getDate() - (adjustDays - day + 1));
+    const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+    const newBedMin = Math.round(currentBedMin + bedShiftPerDay * day);
+    const newWakeMin = Math.round(currentWakeMin + wakeShiftPerDay * day);
+    const adjBed = (newBedMin + 24 * 60) % (24 * 60);
+    const adjWake = (newWakeMin + 24 * 60) % (24 * 60);
+
+    html += '<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 12px 16px; background: var(--btc-surface); border: 1px solid var(--btc-border); border-radius: var(--btc-radius-sm); align-items: center;">';
+    html += '<div><strong>Day ' + day + '</strong><br><span style="font-size: 0.85rem; color: var(--btc-text-muted);">' + dateStr + '</span></div>';
+    html += '<div style="text-align: center;"><span style="font-size: 0.85rem; color: var(--btc-text-muted);">Bedtime</span><br><strong style="color: var(--btc-primary);">' + formatTime(adjBed) + '</strong></div>';
+    html += '<div style="text-align: center;"><span style="font-size: 0.85rem; color: var(--btc-text-muted);">Wake</span><br><strong style="color: var(--btc-primary);">' + formatTime(adjWake) + '</strong></div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  html += '<div style="background: var(--btc-bg); border-radius: var(--btc-radius-sm); padding: 16px; margin-top: 16px;">';
+  html += '<h4 style="color: var(--btc-primary); margin-bottom: 8px; font-size: 1rem;">Jet Lag Tips</h4>';
+  html += '<ul style="margin: 0; padding-left: 20px; color: var(--btc-text-muted); font-size: 0.9rem; line-height: 1.8;">';
+  html += '<li>Start shifting 1 hour per day for eastward travel, 1.5 hours for westward</li>';
+  html += '<li>Get morning sunlight at your destination ASAP — it resets your circadian clock</li>';
+  html += '<li>Avoid caffeine after 2 PM local time at your destination</li>';
+  html += '<li>Melatonin 0.5mg at local bedtime can help, but talk to your doctor first</li>';
+  html += '<li>Stay hydrated on the flight — dehydration worsens jet lag symptoms</li>';
+  html += '</ul></div>';
+
+  document.getElementById('adjustResults').innerHTML = html;
+  document.getElementById('resultBox').classList.add('active');
+
+  drawAdjustChart(currentBedMin, targetBedMin, currentWakeMin, targetWakeMin, adjustDays);
+}
+
+function formatTime(minutes) {
+  const h = Math.floor(minutes / 60) % 24;
+  const m = minutes % 60;
+  const period = h >= 12 ? 'PM' : 'AM';
+  const dh = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+  return String(dh).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ' ' + period;
+}
+
+function drawAdjustChart(startBed, targetBed, startWake, targetWake, days) {
+  const canvas = document.getElementById('adjustChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 280 * dpr;
+  ctx.scale(dpr, dpr);
+
+  const w = rect.width;
+  const h = 280;
+  const padding = 40;
+
+  ctx.clearRect(0, 0, w, h);
+
+  ctx.font = 'bold 14px Inter';
+  ctx.fillStyle = '#1a237e';
+  ctx.textAlign = 'center';
+  ctx.fillText('Bedtime & Wake Time Shift', w / 2, 20);
+
+  const bedDiff = targetBed - startBed;
+  const wakeDiff = targetWake - startWake;
+  const stepX = (w - padding * 2) / (days - 1 || 1);
+  const maxShift = Math.max(Math.abs(bedDiff), Math.abs(wakeDiff), 60);
+  const maxH = h - padding * 2 - 40;
+
+  // Bedtime line
+  ctx.strokeStyle = '#1a237e';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  for (let i = 0; i < days; i++) {
+    const x = padding + i * stepX;
+    const y = h - padding - ((startBed + (bedDiff / days) * i - (startBed - maxShift)) / (maxShift * 2)) * maxH;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Wake time line
+  ctx.strokeStyle = '#ff6f00';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  for (let i = 0; i < days; i++) {
+    const x = padding + i * stepX;
+    const y = h - padding - ((startWake + (wakeDiff / days) * i - (startWake - maxShift)) / (maxShift * 2)) * maxH;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Labels
+  ctx.fillStyle = '#1a237e';
+  ctx.font = '12px Inter';
+  ctx.fillText('Bedtime', w - 60, 40);
+  ctx.fillStyle = '#ff6f00';
+  ctx.fillText('Wake Time', w - 60, 60);
+
+  ctx.fillStyle = '#6b6b6b';
+  ctx.font = '11px Inter';
+  ctx.textAlign = 'center';
+  ctx.fillText('Day 1', padding, h - 10);
+  ctx.fillText('Day ' + days, w - padding, h - 10);
+}
+
+function resetAdjustor() {
+  document.getElementById('departureZone').value = '-6';
+  document.getElementById('arrivalZone').value = '-5';
+  document.getElementById('currentBedtime').value = '22:30';
+  document.getElementById('currentWake').value = '06:30';
+  document.getElementById('travelDate').value = new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0];
+  document.getElementById('adjustDays').value = '5';
+  document.getElementById('resultBox').classList.remove('active');
+  document.getElementById('adjustResults').innerHTML = '';
+  const canvas = document.getElementById('adjustChart');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function exportPlan() {
+  const results = document.getElementById('adjustResults').innerText;
+  const blob = new Blob(['Jet Lag Adjustment Plan\n\n' + results + '\n\nGenerated by bedtimecycle.com'], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'jet-lag-plan.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportCalendar() {
+  const depZone = document.getElementById('departureZone').value;
+  const arrZone = document.getElementById('arrivalZone').value;
+  const currentBedtime = document.getElementById('currentBedtime').value;
+  const currentWake = document.getElementById('currentWake').value;
+  const travelDate = document.getElementById('travelDate').value;
+  const adjustDays = parseInt(document.getElementById('adjustDays').value);
+
+  const hourDiff = parseInt(arrZone) - parseInt(depZone);
+  const [btHour, btMin] = currentBedtime.split(':').map(Number);
+  const [wtHour, wtMin] = currentWake.split(':').map(Number);
+  const targetBedMin = ((btHour * 60 + btMin) - hourDiff * 60 + 24 * 60) % (24 * 60);
+  const targetWakeMin = ((wtHour * 60 + wtMin) - hourDiff * 60 + 24 * 60) % (24 * 60);
+
+  let ics = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Bedtime Cycle//Jet Lag Adjustor//EN\n';
+  const travelDateObj = new Date(travelDate);
+  for (let day = 1; day <= adjustDays; day++) {
+    const date = new Date(travelDateObj);
+    date.setDate(date.getDate() - (adjustDays - day + 1));
+    const dateStr = date.toISOString().split('T')[0].replace(/-/g, '');
+    const bedH = Math.floor(targetBedMin / 60);
+    const bedM = targetBedMin % 60;
+    const wakeH = Math.floor(targetWakeMin / 60);
+    const wakeM = targetWakeMin % 60;
+
+    ics += 'BEGIN:VEVENT\n';
+    ics += 'UID:btc-jetlag-bed-' + day + '@bedtimecycle.com\n';
+    ics += 'DTSTART;VALUE=DATE:' + dateStr + '\n';
+    ics += 'SUMMARY:Target Bedtime: ' + formatTime(targetBedMin) + ' (Day ' + day + '/' + adjustDays + ')\n';
+    ics += 'DESCRIPTION:Jet lag adjustment plan. Target wake: ' + formatTime(targetWakeMin) + '\n';
+    ics += 'END:VEVENT\n';
+  }
+  ics += 'END:VCALENDAR\n';
+
+  const blob = new Blob([ics], { type: 'text/calendar' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'jet-lag-plan.ics';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+window.addEventListener('resize', function() {
+  if (document.getElementById('resultBox').classList.contains('active')) generatePlan();
+});
+
+function savePlanToHistory() {
+  const depZone = document.getElementById('departureZone').value;
+  const arrZone = document.getElementById('arrivalZone').value;
+  const travelDate = document.getElementById('travelDate').value;
+  let history = JSON.parse(localStorage.getItem('btc_jetLagHistory') || '[]');
+  history.unshift({ date: new Date().toLocaleDateString(), dep: depZone, arr: arrZone, travel: travelDate });
+  if (history.length > 20) history = history.slice(0, 20);
+  localStorage.setItem('btc_jetLagHistory', JSON.stringify(history));
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem('btc_jetLagHistory') || '[]');
+  const box = document.getElementById('historyBox');
+  if (!box) return;
+  if (history.length === 0) { box.style.display = 'none'; return; }
+  box.style.display = 'block';
+  const tbody = document.getElementById('historyBody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  history.forEach((item, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + item.date + '</td><td>' + item.dep + '</td><td>' + item.arr + '</td><td>' + item.travel + '</td><td><button onclick="deleteJItem(' + i + ')" style="background:none;border:none;color:var(--btc-error);cursor:pointer;">✕</button></td>';
+    tbody.appendChild(tr);
+  });
+}
+
+function deleteJItem(index) {
+  let history = JSON.parse(localStorage.getItem('btc_jetLagHistory') || '[]');
+  history.splice(index, 1);
+  localStorage.setItem('btc_jetLagHistory', JSON.stringify(history));
+  renderHistory();
+}
+
+function clearJHistory() {
+  if (confirm('Clear all jet lag history?')) {
+    localStorage.removeItem('btc_jetLagHistory');
+    renderHistory();
+  }
+}
+
+// Call save after generate
+const origGenerate = generatePlan;
+generatePlan = function() {
+  origGenerate();
+  savePlanToHistory();
+  renderHistory();
+};
+
+renderHistory();
+
+</script>
+</body>
+</html>
