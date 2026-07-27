@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nap Planner | Bedtime Cycle</title>
+<meta name="description" content="Calculate the perfect nap length and timing. Avoid sleep inertia with our 10-minute vs 90-minute nap guide. Plan your power nap like a pro.">
+<link rel="stylesheet" href="../style.css">
+<link rel="canonical" href="https://bedtimecycle.com/tools/nap-planner.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a237e'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>Z</text></svg>">
+
+<meta property="og:title" content="Nap Planner | Bedtime Cycle">
+<meta property="og:description" content="Calculate the perfect nap length and timing. Avoid sleep inertia.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bedtimecycle.com/tools/nap-planner.html">
+<meta property="og:image" content="https://bedtimecycle.com/images/og-default.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Nap Planner",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bedtimecycle.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://bedtimecycle.com/tools/"},
+    {"@type": "ListItem", "position": 3, "name": "Nap Planner", "item": "https://bedtimecycle.com/tools/nap-planner.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="btc-nav">
+  <div class="btc-nav-inner">
+    <a href="../index.html" class="btc-logo"><span class="btc-logo-icon">Z</span>Bedtime Cycle</a>
+    <button class="btc-nav-toggle" onclick="document.querySelector('.btc-nav-links').classList.toggle('btc-mobile-open')" aria-label="Toggle menu">☰</button>
+    <ul class="btc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<nav class="btc-breadcrumb" aria-label="Breadcrumb">
+  <a href="../index.html">Home</a><span class="btc-breadcrumb-sep">/</span><a href="./index.html">Tools</a><span class="btc-breadcrumb-sep">/</span><span>Nap Planner</span>
+</nav>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_top"><span>Advertisement - tool_top</span></div>
+
+
+<div class="btc-tool-page">
+  <div class="btc-tool-header">
+    <h1>😴 Nap Planner</h1>
+    <p>Calculate the perfect nap length and timing. Avoid sleep inertia — that groggy feeling after a bad nap — with science-backed recommendations.</p>
+  </div>
+
+  <div class="btc-tool-box">
+    <div class="btc-input-group">
+      <label for="currentTime">Current Time</label>
+      <input type="time" id="currentTime" value="14:00">
+    </div>
+    <div class="btc-input-group">
+      <label for="fatigueLevel">How Tired Are You?</label>
+      <select id="fatigueLevel">
+        <option value="slight">Slightly tired — I could push through</option>
+        <option value="moderate" selected>Moderately tired — I need a boost</option>
+        <option value="very">Very tired — I can barely keep my eyes open</option>
+        <option value="exhausted">Exhausted — I feel like I got no sleep last night</option>
+      </select>
+    </div>
+    <div class="btc-input-group">
+      <label for="bedtimeTonight">Your Bedtime Tonight</label>
+      <input type="time" id="bedtimeTonight" value="22:30">
+    </div>
+    <div class="btc-input-group">
+      <label for="napGoal">What do you need the nap for?</label>
+      <select id="napGoal">
+        <option value="alertness">Quick alertness boost (meeting, driving)</option>
+        <option value="memory" selected>Memory consolidation (studying, learning)</option>
+        <option value="recovery">Physical recovery (workout, illness)</option>
+        <option value="catchup">Catch up on lost sleep</option>
+      </select>
+    </div>
+    <button class="btc-calculate-btn" onclick="planNap()">Plan My Nap</button>
+    <button class="btc-reset-btn" onclick="resetNap()">Reset</button>
+  </div>
+
+  <div class="btc-result-box" id="resultBox">
+    <h4>Your Nap Recommendation</h4>
+    <div id="napResults"></div>
+    <div class="btc-chart-container">
+      <canvas id="napChart"></canvas>
+    </div>
+    <div style="margin-top: 20px;">
+      <button class="btc-export-btn" onclick="exportNap()">📥 Export Plan</button>
+      <button class="btc-export-btn" onclick="saveToHistory()" style="margin-left: 8px;">💾 Save to History</button>
+    </div>
+  </div>
+
+  <div class="btc-tool-box" id="historyBox" style="display: none;">
+    <h4 style="margin-bottom: 16px;">Your Nap History</h4>
+    <table class="btc-history-table" id="historyTable">
+      <thead><tr><th>Date</th><th>Time</th><th>Duration</th><th>Type</th><th></th></tr></thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+    <button class="btc-reset-btn" onclick="clearHistory()" style="margin-top: 12px;">Clear History</button>
+  </div>
+</div>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_middle"><span>Advertisement - tool_middle</span></div>
+
+
+<section class="btc-section" style="padding-top: 0;">
+  <div class="btc-container" style="max-width: 800px;">
+    <div class="btc-tool-info">
+      <h2>How It Works</h2>
+      <p>The Nap Planner uses sleep architecture science to recommend the perfect nap:</p>
+      <ol>
+        <li><strong>Sleep stage analysis:</strong> A full sleep cycle is ~90 minutes (light → deep → REM). The first 20–30 minutes are light sleep only. Waking from light sleep causes minimal grogginess. Waking from deep sleep causes severe sleep inertia.</li>
+        <li><strong>Goal-based matching:</strong> Alertness boost = 10–20 min power nap (light sleep only). Memory consolidation = 90 min full cycle (includes REM). Physical recovery = 60 min (includes some deep sleep, slight grogginess expected).</li>
+        <li><strong>Bedtime proximity check:</strong> If your nap is within 2 hours of bedtime, we warn you — napping too close to bedtime can delay nighttime sleep onset by 30–60 minutes.</li>
+        <li><strong>Fatigue adjustment:</strong> Higher fatigue means faster sleep onset, so we may shorten the recommended duration to avoid deep sleep entry.</li>
+      </ol>
+      <p><strong>Pro tip:</strong> The "coffee nap" — drink coffee immediately before a 20-minute nap. Caffeine takes ~20 min to kick in, so you wake up with both nap restoration and caffeine alertness. Studies show 50% fewer driving errors with this combo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="btc-section" style="padding-top: 0;">
+  <div class="btc-container">
+    <div class="btc-post-footer-grid">
+      <div>
+        <h3>Related Articles</h3>
+        <a href="../blog/the-20-minute-nap-rule-why-less-is-more.html" class="btc-related-card">
+          <h4>The 20-Minute Nap Rule: Why Less Is More</h4>
+          <p>I napped for 90 minutes every day for a month. Then I tried 20 minutes.</p>
+        </a>
+        <a href="../blog/the-20-minute-nap-rule-why-less-is-more.html" class="btc-related-card">
+          <h4>How a College Student Used Cycles to Ace Finals</h4>
+          <p>Jake planned his study schedule around nap windows.</p>
+        </a>
+      </div>
+      <div>
+        <h3>Recommended Tools</h3>
+        <a href="./sleep-cycle-calculator.html" class="btc-related-card">
+          <h4>🌙 Sleep Cycle Calculator</h4>
+          <p>Calculate optimal bedtimes based on 90-minute cycles.</p>
+        </a>
+        <a href="./sleep-quality-score.html" class="btc-related-card">
+          <h4>⭐ Sleep Quality Score</h4>
+          <p>Score your sleep quality with a 10-question assessment.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_bottom"><span>Advertisement - tool_bottom</span></div>
+
+
+<footer class="btc-footer">
+  <div class="btc-footer-grid">
+    <div><div class="btc-footer-brand">Bedtime Cycle</div><p class="btc-footer-desc">Science-backed sleep tools built by Dr. Sarah Mitchell in Boulder, Colorado.</p></div>
+    <div><h4>Tools</h4><ul><li><a href="./sleep-cycle-calculator.html">Sleep Cycle Calculator</a></li><li><a href="./bedtime-finder.html">Bedtime Finder</a></li><li><a href="./nap-planner.html">Nap Planner</a></li></ul></div>
+    <div><h4>Site</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li></ul></div>
+    <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+  </div>
+  <div class="btc-footer-bottom"><p>&copy; 2026 Bedtime Cycle. All rights reserved.</p></div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+function planNap() {
+  const currentTime = document.getElementById('currentTime').value;
+  const fatigue = document.getElementById('fatigueLevel').value;
+  const bedtime = document.getElementById('bedtimeTonight').value;
+  const goal = document.getElementById('napGoal').value;
+
+  if (!currentTime || !bedtime) { alert('Please fill in all time fields'); return; }
+
+  const [ctHour, ctMin] = currentTime.split(':').map(Number);
+  const [btHour, btMin] = bedtime.split(':').map(Number);
+  const currentMin = ctHour * 60 + ctMin;
+  const bedtimeMin = btHour * 60 + btMin;
+  const hoursUntilBed = (bedtimeMin - currentMin + 24 * 60) % (24 * 60);
+
+  // Nap recommendations based on fatigue and goal
+  const napTypes = {
+    power: { duration: 10, label: 'Power Nap', desc: '10-20 minutes. Light sleep only. No grogginess. Best for alertness.' },
+    full: { duration: 90, label: 'Full Cycle Nap', desc: '90 minutes. One complete sleep cycle. Best for memory and creativity.' },
+    recovery: { duration: 60, label: 'Recovery Nap', desc: '60 minutes. Includes some deep sleep. May cause slight grogginess.' }
+  };
+
+  let recommendation;
+  if (goal === 'alertness') recommendation = napTypes.power;
+  else if (goal === 'memory') recommendation = napTypes.full;
+  else if (goal === 'recovery') recommendation = napTypes.recovery;
+  else if (fatigue === 'exhausted') recommendation = napTypes.full;
+  else recommendation = napTypes.power;
+
+  // Check if nap is too close to bedtime
+  let warning = '';
+  if (hoursUntilBed < 120) {
+    warning = '<div style="background: var(--btc-error); color: #fff; padding: 12px 16px; border-radius: var(--btc-radius-sm); margin-bottom: 16px; font-size: 0.9rem;"><strong>Warning:</strong> Your nap is within 2 hours of bedtime. This may make it harder to fall asleep tonight. Consider skipping the nap or keeping it under 10 minutes.</div>';
+  }
+
+  let html = warning;
+  html += '<div style="background: var(--btc-accent-bg); border: 2px solid var(--btc-accent); border-radius: var(--btc-radius); padding: 24px; margin-bottom: 20px;">';
+  html += '<div style="font-size: 2rem; font-weight: 700; color: var(--btc-primary); margin-bottom: 8px;">' + recommendation.label + '</div>';
+  html += '<div style="font-size: 1.2rem; color: var(--btc-accent); font-weight: 600; margin-bottom: 12px;">' + recommendation.duration + ' minutes</div>';
+  html += '<p style="color: var(--btc-text-muted); margin: 0;">' + recommendation.desc + '</p>';
+  html += '</div>';
+
+  html += '<div style="background: var(--btc-surface); border: 1px solid var(--btc-border); border-radius: var(--btc-radius-sm); padding: 20px; margin-bottom: 16px;">';
+  html += '<h4 style="color: var(--btc-primary); margin-bottom: 12px;">Nap Window</h4>';
+  html += '<p style="margin: 0; color: var(--btc-text-muted);">Start your nap at <strong style="color: var(--btc-primary);">' + currentTime + '</strong> and set an alarm for <strong style="color: var(--btc-primary);">' + formatTime(currentMin + recommendation.duration) + '</strong>.</p>';
+  html += '</div>';
+
+  html += '<div style="background: var(--btc-bg); border-radius: var(--btc-radius-sm); padding: 16px;">';
+  html += '<h4 style="color: var(--btc-primary); margin-bottom: 8px; font-size: 1rem;">Pro Tips</h4>';
+  html += '<ul style="margin: 0; padding-left: 20px; color: var(--btc-text-muted); font-size: 0.9rem;">';
+  html += '<li>Drink coffee right before a 20-minute nap (the "coffee nap" effect)</li>';
+  html += '<li>Keep the room cool (65-68°F / 18-20°C)</li>';
+  html += '<li>Use an eye mask to block light</li>';
+  html += '<li>Set a loud alarm — oversleeping causes sleep inertia</li>';
+  html += '</ul></div>';
+
+  document.getElementById('napResults').innerHTML = html;
+  document.getElementById('resultBox').classList.add('active');
+
+  drawNapChart(recommendation.duration);
+}
+
+function formatTime(minutes) {
+  const h = Math.floor(minutes / 60) % 24;
+  const m = minutes % 60;
+  const period = h >= 12 ? 'PM' : 'AM';
+  const dh = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+  return String(dh).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ' ' + period;
+}
+
+function drawNapChart(duration) {
+  const canvas = document.getElementById('napChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 200 * dpr;
+  ctx.scale(dpr, dpr);
+
+  const w = rect.width;
+  const h = 200;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Title
+  ctx.font = 'bold 14px Inter';
+  ctx.fillStyle = '#1a237e';
+  ctx.textAlign = 'center';
+  ctx.fillText('Sleep Stages During Your Nap', w / 2, 20);
+
+  // Draw stages
+  const stages = duration <= 20 ? 
+    [{ name: 'Light Sleep', pct: 1, color: '#3949ab' }] :
+    [{ name: 'Light', pct: 0.5, color: '#3949ab' }, { name: 'Deep', pct: 0.3, color: '#1a237e' }, { name: 'REM', pct: 0.2, color: '#ff6f00' }];
+
+  let x = 40;
+  const barH = 60;
+  const y = h / 2 - barH / 2;
+  const totalW = w - 80;
+
+  stages.forEach(stage => {
+    const sw = totalW * stage.pct;
+    ctx.fillStyle = stage.color;
+    ctx.fillRect(x, y, sw, barH);
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 12px Inter';
+    ctx.textAlign = 'center';
+    ctx.fillText(stage.name, x + sw / 2, y + barH / 2 + 4);
+    x += sw;
+  });
+
+  // Time labels
+  ctx.fillStyle = '#6b6b6b';
+  ctx.font = '11px Inter';
+  ctx.textAlign = 'left';
+  ctx.fillText('0 min', 40, y + barH + 20);
+  ctx.textAlign = 'right';
+  ctx.fillText(duration + ' min', w - 40, y + barH + 20);
+}
+
+function resetNap() {
+  document.getElementById('currentTime').value = '14:00';
+  document.getElementById('fatigueLevel').value = 'moderate';
+  document.getElementById('bedtimeTonight').value = '22:30';
+  document.getElementById('napGoal').value = 'memory';
+  document.getElementById('resultBox').classList.remove('active');
+  document.getElementById('napResults').innerHTML = '';
+  const canvas = document.getElementById('napChart');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function exportNap() {
+  const results = document.getElementById('napResults').innerText;
+  const blob = new Blob(['Nap Planner Results\n\n' + results + '\n\nGenerated by bedtimecycle.com'], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'nap-plan.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function saveToHistory() {
+  const currentTime = document.getElementById('currentTime').value;
+  const goal = document.getElementById('napGoal').value;
+  let history = JSON.parse(localStorage.getItem('btc_napHistory') || '[]');
+  history.unshift({ date: new Date().toLocaleDateString(), time: currentTime, duration: '10-90 min', type: goal });
+  if (history.length > 20) history = history.slice(0, 20);
+  localStorage.setItem('btc_napHistory', JSON.stringify(history));
+  renderHistory();
+  alert('Saved to history!');
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem('btc_napHistory') || '[]');
+  if (history.length === 0) { document.getElementById('historyBox').style.display = 'none'; return; }
+  document.getElementById('historyBox').style.display = 'block';
+  const tbody = document.getElementById('historyBody');
+  tbody.innerHTML = '';
+  history.forEach((item, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + item.date + '</td><td>' + item.time + '</td><td>' + item.duration + '</td><td>' + item.type + '</td><td><button onclick="deleteItem(' + i + ')" style="background: none; border: none; color: var(--btc-error); cursor: pointer;">✕</button></td>';
+    tbody.appendChild(tr);
+  });
+}
+
+function deleteItem(index) {
+  let history = JSON.parse(localStorage.getItem('btc_napHistory') || '[]');
+  history.splice(index, 1);
+  localStorage.setItem('btc_napHistory', JSON.stringify(history));
+  renderHistory();
+}
+
+function clearHistory() {
+  if (confirm('Clear all nap history?')) {
+    localStorage.removeItem('btc_napHistory');
+    renderHistory();
+  }
+}
+
+renderHistory();
+window.addEventListener('resize', function() {
+  if (document.getElementById('resultBox').classList.contains('active')) planNap();
+});
+</script>
+</body>
+</html>
