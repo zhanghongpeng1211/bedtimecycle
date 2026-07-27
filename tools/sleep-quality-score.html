@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sleep Quality Score | Bedtime Cycle</title>
+<meta name="description" content="Score your sleep quality with a 10-question assessment. Covering sleep latency, efficiency, and daytime function. Get personalized improvement tips.">
+<link rel="stylesheet" href="../style.css">
+<link rel="canonical" href="https://bedtimecycle.com/tools/sleep-quality-score.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a237e'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>Z</text></svg>">
+
+<meta property="og:title" content="Sleep Quality Score | Bedtime Cycle">
+<meta property="og:description" content="Score your sleep quality with a 10-question assessment. Get personalized tips.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bedtimecycle.com/tools/sleep-quality-score.html">
+<meta property="og:image" content="https://bedtimecycle.com/images/og-default.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Sleep Quality Score",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bedtimecycle.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://bedtimecycle.com/tools/"},
+    {"@type": "ListItem", "position": 3, "name": "Sleep Quality Score", "item": "https://bedtimecycle.com/tools/sleep-quality-score.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="btc-nav">
+  <div class="btc-nav-inner">
+    <a href="../index.html" class="btc-logo"><span class="btc-logo-icon">Z</span>Bedtime Cycle</a>
+    <button class="btc-nav-toggle" onclick="document.querySelector('.btc-nav-links').classList.toggle('btc-mobile-open')" aria-label="Toggle menu">☰</button>
+    <ul class="btc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<nav class="btc-breadcrumb" aria-label="Breadcrumb">
+  <a href="../index.html">Home</a><span class="btc-breadcrumb-sep">/</span><a href="./index.html">Tools</a><span class="btc-breadcrumb-sep">/</span><span>Sleep Quality Score</span>
+</nav>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_top"><span>Advertisement - tool_top</span></div>
+
+
+<div class="btc-tool-page">
+  <div class="btc-tool-header">
+    <h1>⭐ Sleep Quality Score</h1>
+    <p>Answer 10 questions about your sleep habits. Get a score from 0-100 and personalized recommendations based on sleep medicine research.</p>
+  </div>
+
+  <div class="btc-tool-box" id="quizBox">
+    <div id="questionContainer">
+      <div style="margin-bottom: 8px; color: var(--btc-text-muted); font-size: 0.9rem;">Question <span id="qNum">1</span> of 10</div>
+      <h3 id="questionText" style="font-family: var(--btc-font-heading); color: var(--btc-primary); margin-bottom: 20px; font-size: 1.3rem;">How long does it take you to fall asleep?</h3>
+      <div id="options" style="display: grid; gap: 10px;"></div>
+    </div>
+    <div style="margin-top: 20px; height: 6px; background: var(--btc-border); border-radius: 3px; overflow: hidden;">
+      <div id="progressBar" style="height: 100%; background: var(--btc-accent); width: 10%; transition: width 0.3s;"></div>
+    </div>
+    <button class="btc-reset-btn" onclick="resetQuiz()" style="margin-top: 16px;">Restart Quiz</button>
+  </div>
+
+  <div class="btc-result-box" id="resultBox">
+    <h4>Your Sleep Quality Score</h4>
+    <div id="scoreResults"></div>
+    <div class="btc-chart-container">
+      <canvas id="scoreChart"></canvas>
+    </div>
+    <div style="margin-top: 20px;">
+      <button class="btc-export-btn" onclick="exportScore()">📥 Export Results</button>
+      <button class="btc-export-btn" onclick="saveToHistory()" style="margin-left: 8px;">💾 Save to History</button>
+    </div>
+  </div>
+
+  <div class="btc-tool-box" id="historyBox" style="display: none;">
+    <h4 style="margin-bottom: 16px;">Your Score History</h4>
+    <table class="btc-history-table" id="historyTable">
+      <thead><tr><th>Date</th><th>Score</th><th>Category</th><th></th></tr></thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+    <button class="btc-reset-btn" onclick="clearHistory()" style="margin-top: 12px;">Clear History</button>
+  </div>
+</div>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_middle"><span>Advertisement - tool_middle</span></div>
+
+
+<section class="btc-section" style="padding-top: 0;">
+  <div class="btc-container">
+    <div class="btc-post-footer-grid">
+      <div>
+        <h3>Related Articles</h3>
+        <a href="../blog/i-tried-4-sleep-tracking-apps-for-30-days.html" class="btc-related-card">
+          <h4>I Tried 4 Sleep Tracking Apps for 30 Days</h4>
+          <p>One app said 8.2 hours. Another said 6.4. I found the truth.</p>
+        </a>
+        <a href="../blog/mattress-firmness-and-sleep-quality.html" class="btc-related-card">
+          <h4>Mattress Firmness and Sleep Quality</h4>
+          <p>What the research actually says about mattress firmness.</p>
+        </a>
+      </div>
+      <div>
+        <h3>Recommended Tools</h3>
+        <a href="./sleep-cycle-calculator.html" class="btc-related-card">
+          <h4>🌙 Sleep Cycle Calculator</h4>
+          <p>Calculate optimal bedtimes based on 90-minute cycles.</p>
+        </a>
+        <a href="./sleep-debt-tracker.html" class="btc-related-card">
+          <h4>📊 Sleep Debt Tracker</h4>
+          <p>Track your accumulated sleep debt over time.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_bottom"><span>Advertisement - tool_bottom</span></div>
+
+
+<footer class="btc-footer">
+  <div class="btc-footer-grid">
+    <div><div class="btc-footer-brand">Bedtime Cycle</div><p class="btc-footer-desc">Science-backed sleep tools built by Dr. Sarah Mitchell in Boulder, Colorado.</p></div>
+    <div><h4>Tools</h4><ul><li><a href="./sleep-cycle-calculator.html">Sleep Cycle Calculator</a></li><li><a href="./sleep-quality-score.html">Sleep Quality Score</a></li><li><a href="./sleep-debt-tracker.html">Sleep Debt Tracker</a></li></ul></div>
+    <div><h4>Site</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li></ul></div>
+    <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+  </div>
+  <div class="btc-footer-bottom"><p>&copy; 2026 Bedtime Cycle. All rights reserved.</p></div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+const questions = [
+  { text: "How long does it take you to fall asleep?", options: [{ text: "Less than 10 minutes", score: 10 }, { text: "10-20 minutes", score: 8 }, { text: "20-30 minutes", score: 5 }, { text: "30-60 minutes", score: 2 }, { text: "More than 60 minutes", score: 0 }], category: "Latency" },
+  { text: "How many times do you wake up during the night?", options: [{ text: "Never", score: 10 }, { text: "Once", score: 8 }, { text: "2-3 times", score: 5 }, { text: "4-5 times", score: 2 }, { text: "More than 5 times", score: 0 }], category: "Continuity" },
+  { text: "How long are you awake during the night (total)?", options: [{ text: "0 minutes", score: 10 }, { text: "5-10 minutes", score: 8 }, { text: "10-30 minutes", score: 5 }, { text: "30-60 minutes", score: 2 }, { text: "More than 60 minutes", score: 0 }], category: "Continuity" },
+  { text: "What time do you usually wake up in the morning?", options: [{ text: "Before my alarm, feeling refreshed", score: 10 }, { text: "With my alarm, feeling okay", score: 7 }, { text: "With my alarm, feeling tired", score: 4 }, { text: "After snoozing multiple times", score: 1 }, { text: "I sleep through my alarm", score: 0 }], category: "Efficiency" },
+  { text: "How do you feel during the day?", options: [{ text: "Energetic and focused all day", score: 10 }, { text: "Mostly alert, slight afternoon dip", score: 7 }, { text: "Tired in the afternoon, need coffee", score: 4 }, { text: "Struggle to stay awake after lunch", score: 1 }, { text: "Exhausted all day", score: 0 }], category: "Daytime" },
+  { text: "Do you use electronic devices within 1 hour of bedtime?", options: [{ text: "Never", score: 10 }, { text: "Rarely", score: 7 }, { text: "Sometimes", score: 4 }, { text: "Usually", score: 1 }, { text: "Always", score: 0 }], category: "Hygiene" },
+  { text: "How consistent is your sleep schedule?", options: [{ text: "Same time every day (+/- 15 min)", score: 10 }, { text: "Same time weekdays, varies weekends", score: 6 }, { text: "Varies by 1-2 hours", score: 3 }, { text: "Completely irregular", score: 0 }], category: "Regularity" },
+  { text: "How often do you consume caffeine after 2 PM?", options: [{ text: "Never", score: 10 }, { text: "Rarely", score: 7 }, { text: "Sometimes", score: 4 }, { text: "Usually", score: 1 }, { text: "Always", score: 0 }], category: "Hygiene" },
+  { text: "How would you rate your sleep environment?", options: [{ text: "Dark, quiet, cool, comfortable", score: 10 }, { text: "Mostly good, minor issues", score: 7 }, { text: "Some problems (light, noise, temp)", score: 4 }, { text: "Poor sleep environment", score: 1 }, { text: "Terrible, I dread going to bed", score: 0 }], category: "Environment" },
+  { text: "Do you feel rested when you wake up?", options: [{ text: "Yes, fully rested", score: 10 }, { text: "Mostly, with minor grogginess", score: 7 }, { text: "Somewhat, but it takes time", score: 4 }, { text: "Rarely feel rested", score: 1 }, { text: "Never feel rested", score: 0 }], category: "Efficiency" }
+];
+
+let currentQ = 0;
+let scores = [];
+
+function showQuestion() {
+  const q = questions[currentQ];
+  document.getElementById('qNum').textContent = currentQ + 1;
+  document.getElementById('questionText').textContent = q.text;
+  document.getElementById('progressBar').style.width = ((currentQ + 1) / questions.length * 100) + '%';
+
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.style.cssText = 'width: 100%; text-align: left; padding: 14px 18px; background: var(--btc-surface); border: 1px solid var(--btc-border); border-radius: var(--btc-radius-sm); font-size: 1rem; cursor: pointer; transition: all 0.2s; color: var(--btc-text); font-family: var(--btc-font-body);';
+    btn.textContent = opt.text;
+    btn.onmouseover = () => { btn.style.background = 'var(--btc-accent-bg)'; btn.style.borderColor = 'var(--btc-accent)'; };
+    btn.onmouseout = () => { btn.style.background = 'var(--btc-surface)'; btn.style.borderColor = 'var(--btc-border)'; };
+    btn.onclick = () => answer(opt.score, q.category);
+    opts.appendChild(btn);
+  });
+}
+
+function answer(score, category) {
+  scores.push({ score, category });
+  currentQ++;
+  if (currentQ < questions.length) {
+    showQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  document.getElementById('quizBox').style.display = 'none';
+  document.getElementById('resultBox').classList.add('active');
+
+  const total = scores.reduce((s, item) => s + item.score, 0);
+  const max = questions.length * 10;
+  const pct = Math.round((total / max) * 100);
+
+  // Category breakdown
+  const cats = {};
+  scores.forEach(s => { cats[s.category] = (cats[s.category] || 0) + s.score; });
+  const catMax = { Latency: 10, Continuity: 20, Efficiency: 20, Daytime: 10, Hygiene: 30, Regularity: 10, Environment: 10 };
+
+  let category = '';
+  if (pct >= 85) category = 'Excellent';
+  else if (pct >= 70) category = 'Good';
+  else if (pct >= 50) category = 'Fair';
+  else if (pct >= 30) category = 'Poor';
+  else category = 'Very Poor';
+
+  let html = '<div style="text-align: center; margin-bottom: 24px;">';
+  html += '<div style="font-size: 4rem; font-weight: 700; color: var(--btc-primary); line-height: 1;">' + pct + '</div>';
+  html += '<div style="font-size: 1.2rem; color: var(--btc-text-muted); margin-top: 8px;">out of 100</div>';
+  html += '<div style="display: inline-block; background: ' + (pct >= 70 ? 'var(--btc-success)' : pct >= 50 ? 'var(--btc-warning)' : 'var(--btc-error)') + '; color: #fff; padding: 6px 16px; border-radius: 20px; font-weight: 600; margin-top: 12px;">' + category + '</div>';
+  html += '</div>';
+
+  html += '<div style="background: var(--btc-bg); border-radius: var(--btc-radius-sm); padding: 20px; margin-bottom: 20px;">';
+  html += '<h4 style="color: var(--btc-primary); margin-bottom: 12px;">Category Breakdown</h4>';
+  html += '<div style="display: grid; gap: 10px;">';
+  for (let cat in cats) {
+    const catPct = Math.round((cats[cat] / catMax[cat]) * 100);
+    html += '<div style="display: flex; justify-content: space-between; align-items: center;">';
+    html += '<span>' + cat + '</span>';
+    html += '<div style="display: flex; align-items: center; gap: 8px;">';
+    html += '<div style="width: 100px; height: 8px; background: var(--btc-border); border-radius: 4px; overflow: hidden;">';
+    html += '<div style="width: ' + catPct + '%; height: 100%; background: ' + (catPct >= 70 ? 'var(--btc-success)' : catPct >= 50 ? 'var(--btc-warning)' : 'var(--btc-error)') + ';"></div>';
+    html += '</div>';
+    html += '<span style="font-weight: 600; min-width: 36px;">' + catPct + '%</span>';
+    html += '</div></div>';
+  }
+  html += '</div></div>';
+
+  html += '<div style="background: var(--btc-accent-bg); border: 1px solid var(--btc-accent); border-radius: var(--btc-radius-sm); padding: 20px;">';
+  html += '<h4 style="color: var(--btc-primary); margin-bottom: 12px;">Top Recommendations</h4>';
+  html += '<ul style="margin: 0; padding-left: 20px; color: var(--btc-text-muted); line-height: 1.8;">';
+  if ((cats['Hygiene'] || 0) < 20) html += '<li>Limit screens 1 hour before bed. Blue light suppresses melatonin.</li>';
+  if ((cats['Continuity'] || 0) < 12) html += '<li>If you wake up at night, do not look at the clock. It increases anxiety.</li>';
+  if ((cats['Regularity'] || 0) < 6) html += '<li>Keep the same wake time on weekends. Your circadian rhythm hates variation.</li>';
+  if ((cats['Environment'] || 0) < 6) html += '<li>Room temperature should be 65-68°F (18-20°C). Cooler is better for deep sleep.</li>';
+  if ((cats['Latency'] || 0) < 6) html += '<li>If you cannot fall asleep in 20 minutes, get up and do something boring. Do not lie there frustrated.</li>';
+  html += '</ul></div>';
+
+  document.getElementById('scoreResults').innerHTML = html;
+  drawScoreChart(cats, catMax);
+}
+
+function drawScoreChart(cats, catMax) {
+  const canvas = document.getElementById('scoreChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 300 * dpr;
+  ctx.scale(dpr, dpr);
+
+  const w = rect.width;
+  const h = 300;
+  const padding = 50;
+
+  ctx.clearRect(0, 0, w, h);
+
+  ctx.font = 'bold 14px Inter';
+  ctx.fillStyle = '#1a237e';
+  ctx.textAlign = 'center';
+  ctx.fillText('Sleep Quality Breakdown by Category', w / 2, 20);
+
+  const catNames = Object.keys(cats);
+  const barW = (w - padding * 2) / catNames.length - 10;
+  const maxH = h - padding * 2 - 30;
+
+  catNames.forEach((cat, i) => {
+    const pct = (cats[cat] / catMax[cat]);
+    const x = padding + i * (barW + 10);
+    const barH = pct * maxH;
+    const y = h - padding - barH;
+
+    ctx.fillStyle = pct >= 0.7 ? '#2e7d32' : pct >= 0.5 ? '#ed6c02' : '#d32f2f';
+    ctx.fillRect(x, y, barW, barH);
+
+    ctx.fillStyle = '#2d2d2d';
+    ctx.font = '11px Inter';
+    ctx.textAlign = 'center';
+    ctx.fillText(Math.round(pct * 100) + '%', x + barW / 2, y - 5);
+
+    ctx.save();
+    ctx.translate(x + barW / 2, h - padding + 15);
+    ctx.rotate(-Math.PI / 4);
+    ctx.fillText(cat, 0, 0);
+    ctx.restore();
+  });
+}
+
+function resetQuiz() {
+  currentQ = 0;
+  scores = [];
+  document.getElementById('quizBox').style.display = 'block';
+  document.getElementById('resultBox').classList.remove('active');
+  document.getElementById('scoreResults').innerHTML = '';
+  const canvas = document.getElementById('scoreChart');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  showQuestion();
+}
+
+function exportScore() {
+  const results = document.getElementById('scoreResults').innerText;
+  const blob = new Blob(['Sleep Quality Score Results\n\n' + results + '\n\nGenerated by bedtimecycle.com'], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'sleep-quality-score.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function saveToHistory() {
+  const total = scores.reduce((s, item) => s + item.score, 0);
+  const pct = Math.round((total / (questions.length * 10)) * 100);
+  let category = pct >= 85 ? 'Excellent' : pct >= 70 ? 'Good' : pct >= 50 ? 'Fair' : pct >= 30 ? 'Poor' : 'Very Poor';
+  let history = JSON.parse(localStorage.getItem('btc_qualityHistory') || '[]');
+  history.unshift({ date: new Date().toLocaleDateString(), score: pct, category });
+  if (history.length > 20) history = history.slice(0, 20);
+  localStorage.setItem('btc_qualityHistory', JSON.stringify(history));
+  renderHistory();
+  alert('Saved to history!');
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem('btc_qualityHistory') || '[]');
+  if (history.length === 0) { document.getElementById('historyBox').style.display = 'none'; return; }
+  document.getElementById('historyBox').style.display = 'block';
+  const tbody = document.getElementById('historyBody');
+  tbody.innerHTML = '';
+  history.forEach((item, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + item.date + '</td><td>' + item.score + '</td><td>' + item.category + '</td><td><button onclick="deleteItem(' + i + ')" style="background: none; border: none; color: var(--btc-error); cursor: pointer;">✕</button></td>';
+    tbody.appendChild(tr);
+  });
+}
+
+function deleteItem(index) {
+  let history = JSON.parse(localStorage.getItem('btc_qualityHistory') || '[]');
+  history.splice(index, 1);
+  localStorage.setItem('btc_qualityHistory', JSON.stringify(history));
+  renderHistory();
+}
+
+function clearHistory() {
+  if (confirm('Clear all score history?')) {
+    localStorage.removeItem('btc_qualityHistory');
+    renderHistory();
+  }
+}
+
+renderHistory();
+showQuestion();
+</script>
+</body>
+</html>
