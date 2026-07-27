@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bedtime Cycle — Sleep Science Tools That Actually Work</title>
+<meta name="description" content="Free sleep cycle calculators and science-backed tools built by Dr. Sarah Mitchell in Boulder, Colorado. Calculate your optimal bedtime, plan naps, track sleep debt — all in your browser.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+
+<meta property="og:title" content="Bedtime Cycle — Sleep Science Tools That Actually Work">
+<meta property="og:description" content="Free sleep cycle calculators built by a sleep scientist in Boulder. No sign-ups. No data collection.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bedtimecycle.com/">
+<meta property="og:image" content="https://bedtimecycle.com/images/og-home.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bedtime Cycle — Sleep Science Tools">
+<meta name="twitter:description" content="Free sleep cycle calculators built by Dr. Sarah Mitchell in Boulder, Colorado.">
+<meta name="twitter:image" content="https://bedtimecycle.com/images/og-home.jpg">
+
+<link rel="canonical" href="https://bedtimecycle.com/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a237e'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>Z</text></svg>">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Bedtime Cycle",
+  "url": "https://bedtimecycle.com/",
+  "description": "Free sleep cycle calculators and science-backed sleep tools.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bedtime Cycle",
+    "url": "https://bedtimecycle.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bedtimecycle.com/"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="btc-nav">
+  <div class="btc-nav-inner">
+    <a href="./index.html" class="btc-logo">
+      <span class="btc-logo-icon">Z</span>
+      Bedtime Cycle
+    </a>
+    <button class="btc-nav-toggle" onclick="document.querySelector('.btc-nav-links').classList.toggle('btc-mobile-open')" aria-label="Toggle menu">☰</button>
+    <ul class="btc-nav-links">
+      <li><a href="./index.html" class="btc-active">Home</a></li>
+      <li><a href="./tools/index.html">Tools</a></li>
+      <li><a href="./blog/index.html">Blog</a></li>
+      <li><a href="./about.html">About</a></li>
+      <li><a href="./contact.html">Contact</a></li>
+      <li><a href="./faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero — Story Narrative -->
+<section class="btc-hero">
+  <div class="btc-hero-inner">
+    <span class="btc-hero-label">🔬 Built by a Sleep Scientist in Boulder</span>
+    <h1>I Woke Up Tired for 10 Years. Then I Learned About 90-Minute Cycles.</h1>
+    <p>Free sleep calculators that run entirely in your browser. No sign-ups. No data collection. Just the math your alarm clock never told you.</p>
+    <div class="btc-hero-cta">
+      <a href="./tools/sleep-cycle-calculator.html" class="btc-btn btc-btn-primary btc-btn-lg">Calculate Your Bedtime</a>
+      <a href="./blog/index.html" class="btc-btn btc-btn-outline btc-btn-lg">Read Sarah's Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<section class="btc-stats-bar">
+  <div class="btc-stats-inner">
+    <div class="btc-stat-item">
+      <div class="btc-stat-value">6</div>
+      <div class="btc-stat-label">Free Tools</div>
+    </div>
+    <div class="btc-stat-item">
+      <div class="btc-stat-value">847</div>
+      <div class="btc-stat-label">Mornings Tracked</div>
+    </div>
+    <div class="btc-stat-item">
+      <div class="btc-stat-value">0</div>
+      <div class="btc-stat-label">Data Stored</div>
+    </div>
+    <div class="btc-stat-item">
+      <div class="btc-stat-value">100%</div>
+      <div class="btc-stat-label">Browser-Only</div>
+    </div>
+  </div>
+</section>
+
+<div class="btc-container">
+<div class="btc-ad-slot has-content" data-ad-slot="hero_top" style="width:100%;height:250px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8f4f8,#f0e8f4);color:#667;font-size:14px;font-family:Inter,Segoe UI,sans-serif;border-radius:8px;margin:20px 0;"><span>Advertisement — hero_top</span></div>
+</div>
+
+<!-- Hero Top Ad -->
+
+<!-- Story Section — The Origin -->
+<section class="btc-section">
+  <div class="btc-container" style="max-width: 800px;">
+    <h2 class="btc-section-title" style="text-align: left; margin-bottom: 24px;">The Night Everything Changed</h2>
+    <p style="font-size: 1.1rem; color: var(--btc-text-muted); line-height: 1.8; margin-bottom: 20px;">
+      It was 3:47 AM. I was holding my son, rocking him back to sleep, and staring at my own reflection in the dark window. I had a PhD in Behavioral Neuroscience. I had spent six years in a sleep lab at CU Boulder. And I had not slept through the night in fourteen months.
+    </p>
+    <p style="font-size: 1.1rem; color: var(--btc-text-muted); line-height: 1.8; margin-bottom: 20px;">
+      The next morning, I pulled out my old lab notebooks. I found the data we had collected on ultradian rhythms — the 90-minute cycles that govern not just sleep, but alertness, creativity, and mood. I realized I had been setting my alarm at the wrong point in my cycle for a decade.
+    </p>
+    <p style="font-size: 1.1rem; color: var(--btc-text-muted); line-height: 1.8; margin-bottom: 32px;">
+      That is when I built the first version of the Sleep Cycle Calculator. For myself. Then my husband started using it. Then my mom. Then my mom's book club. Now it is here for you.
+    </p>
+    <a href="./about.html" style="font-weight: 600; color: var(--btc-accent);">Read the full story →</a>
+  </div>
+</section>
+
+<!-- Tools Section — Featured -->
+<section class="btc-section btc-section-alt">
+  <div class="btc-container">
+    <h2 class="btc-section-title">The Tools I Use Every Night</h2>
+    <p class="btc-section-subtitle">Six calculators. Every piece of data stays in your browser — we never see it, store it, or sell it.</p>
+    <div class="btc-card-grid">
+
+      <a class="btc-tool-card" href="./tools/sleep-cycle-calculator.html">
+        <div class="btc-tool-icon">🌙</div>
+        <h3>Sleep Cycle Calculator</h3>
+        <p>Enter your target wake-up time. Get five optimal bedtimes based on 90-minute cycles. No more waking up in the middle of deep sleep.</p>
+        <span class="btc-tool-tag">Most Popular</span>
+      </a>
+
+      <a class="btc-tool-card" href="./tools/bedtime-finder.html">
+        <div class="btc-tool-icon">🕐</div>
+        <h3>Bedtime Finder</h3>
+        <p>Tell us when you usually sleep and how you feel. We will recommend a bedtime shift with a realistic adjustment plan.</p>
+        <span class="btc-tool-tag">Planning</span>
+      </a>
+
+      <a class="btc-tool-card" href="./tools/nap-planner.html">
+        <div class="btc-tool-icon">😴</div>
+        <h3>Nap Planner</h3>
+        <p>Calculate the perfect nap length and timing. Avoid sleep inertia with our 10-minute vs. 90-minute nap guide.</p>
+        <span class="btc-tool-tag">Quick Fix</span>
+      </a>
+
+    </div>
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="./tools/index.html" class="btc-btn btc-btn-secondary">View All 6 Tools</a>
+    </div>
+  </div>
+</section>
+
+<!-- All Tools Grid -->
+<section class="btc-section">
+  <div class="btc-container">
+    <h2 class="btc-section-title">All Sleep Tools</h2>
+    <p class="btc-section-subtitle">Every calculator uses peer-reviewed sleep science. No pseudoscience. No miracle cures.</p>
+    <div class="btc-card-grid">
+
+      <a class="btc-tool-card" href="./tools/sleep-cycle-calculator.html">
+        <div class="btc-tool-icon">🌙</div>
+        <h3>Sleep Cycle Calculator</h3>
+        <p>Calculate optimal bedtimes using 90-minute cycle theory. Supports custom cycle lengths.</p>
+      </a>
+
+      <a class="btc-tool-card" href="./tools/bedtime-finder.html">
+        <div class="btc-tool-icon">🕐</div>
+        <h3>Bedtime Finder</h3>
+        <p>Find your ideal bedtime based on current habits and desired wake time.</p>
+      </a>
+
+      <a class="btc-tool-card" href="./tools/nap-planner.html">
+        <div class="btc-tool-icon">😴</div>
+        <h3>Nap Planner</h3>
+        <p>Plan naps that boost energy without causing grogginess. Timing is everything.</p>
+      </a>
+
+      <a class="btc-tool-card" href="./tools/sleep-debt-tracker.html">
+        <div class="btc-tool-icon">📊</div>
+        <h3>Sleep Debt Tracker</h3>
+        <p>Log your sleep and see your accumulated debt. Get a realistic repayment plan.</p>
+      </a>
+
+      <a class="btc-tool-card" href="./tools/sleep-quality-score.html">
+        <div class="btc-tool-icon">⭐</div>
+        <h3>Sleep Quality Score</h3>
+        <p>10-question assessment covering sleep latency, efficiency, and daytime function.</p>
+      </a>
+
+      <a class="btc-tool-card" href="./tools/jet-lag-adjustor.html">
+        <div class="btc-tool-icon">✈️</div>
+        <h3>Jet Lag Adjustor</h3>
+        <p>Plan your gradual schedule shift before cross-timezone travel. Export to calendar.</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div class="btc-container">
+<div class="btc-ad-slot has-content" data-ad-slot="middle" style="width:100%;height:250px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8f4f8,#f0e8f4);color:#667;font-size:14px;font-family:Inter,Segoe UI,sans-serif;border-radius:8px;margin:20px 0;"><span>Advertisement — middle</span></div>
+</div>
+
+<!-- Articles Section — Static 6 + Dynamic -->
+<section class="btc-section btc-section-alt">
+  <div class="btc-container">
+    <h2 class="btc-section-title">From the Sleep Lab Diaries</h2>
+    <p class="btc-section-subtitle">Real experiments, real data, real mistakes. No sleep industry BS.</p>
+    <!-- INDEX_ARTICLES_START -->
+
+
+
+
+
+    <div class="btc-card-grid" id="home-articles">
+      <a class="btc-article-card" href="./blog/sleep-deprivation-health-costs-2026.html">
+        <img src="./images/blog/sleep-deprivation-health-costs-2026.jpg" alt="Sleep Deprivation Health Costs 2026" loading="lazy" width="800" height="450">
+        <div class="btc-article-card-body">
+          <span style="display: inline-block; background: var(--btc-accent-bg); color: var(--btc-accent); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Personal Story</span>
+          <h3>Sleep Deprivation Health Costs 2026</h3>
+          <p>I tracked my sleep for 30 days. Not just hours. Quality. Deep sleep percentage. REM cycles. Wake events. My watch gave me a "sleep score" every mornin...</p>
+          <div class="btc-article-meta">July 23, 2026</span>
+            <span>8 min</span>
+          </div>
+        </div>
+      </a>
+<a class="btc-article-card" href="./blog/boulder-heat-wave-sleep-tracker-lies.html">
+        <img src="./images/blog/boulder-heat-wave-sleep-tracker-lies.jpg" alt="Boulder Heat Wave Sleep Tracker Lies" loading="lazy" width="800" height="450">
+        <div class="btc-article-card-body">
+          <span style="display: inline-block; background: var(--btc-accent-bg); color: var(--btc-accent); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Personal Story</span>
+          <h3>Boulder Heat Wave Sleep Tracker Lies</h3>
+          <p>Why My Sleep Tracker Lied to Me Every Night of the Boulder Heat Wave Dr. Sarah Mitchell At 3:14 AM last Wednesday, I was staring at the ceiling of my ...</p>
+          <div class="btc-article-meta">July 06, 2026</span>
+            <span>8 min</span>
+          </div>
+        </div>
+      </a>
+<a class="btc-article-card" href="./blog/woke-up-447-am-30-days-sleep-score-down.html">
+        <img src="./images/blog/woke-up-447-am-30-days-sleep-score-down.jpg" alt="Woke Up 447 Am 30 Days Sleep Score Down" loading="lazy" width="800" height="450">
+        <div class="btc-article-card-body">
+          <span style="display: inline-block; background: var(--btc-accent-bg); color: var(--btc-accent); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Personal Story</span>
+          <h3>Woke Up 447 Am 30 Days Sleep Score Down</h3>
+          <p>The alarm went off at 4:47 AM because 5:00 felt too round, too obvious, too much like giving up. I had read the books. I had watched the YouTube video...</p>
+          <div class="btc-article-meta">July 06, 2026</span>
+            <span>8 min</span>
+          </div>
+        </div>
+      </a>
+<a class="btc-article-card" href="./blog/why-my-7-year-old-outsmarted-my-sleep-routine.html">
+        <img src="./images/blog/why-my-7-year-old-outsmarted-my-sleep-routine.jpg" alt="Why My 7 Year Old Outsmarted My Sleep Routine" loading="lazy" width="800" height="450">
+        <div class="btc-article-card-body">
+          <span style="display: inline-block; background: var(--btc-accent-bg); color: var(--btc-accent); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Personal Story</span>
+          <h3>Why My 7 Year Old Outsmarted My Sleep Routine</h3>
+          <p>Why My 7-Year-Old Outsmarted My Sleep Routine (And What I Did About It) It was 9:47 PM on a Tuesday in Boulder, and Leo was still awake. Not just awak...</p>
+          <div class="btc-article-meta">June 26, 2026</span>
+            <span>8 min</span>
+          </div>
+        </div>
+      </a>
+<a class="btc-article-card" href="./blog/i-tracked-my-sleep-for-847-mornings-then-i-ruined-it-with.html">
+        <img src="./images/blog/i-tracked-my-sleep-for-847-mornings-then-i-ruined-it-with.jpg" alt="I Tracked My Sleep For 847 Mornings Then I Ruined It With" loading="lazy" width="800" height="450">
+        <div class="btc-article-card-body">
+          <span style="display: inline-block; background: var(--btc-accent-bg); color: var(--btc-accent); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Personal Story</span>
+          <h3>I Tracked My Sleep For 847 Mornings Then I Ruined It With</h3>
+          <p>I Tracked My Sleep for 847 Mornings. Then I Ruined It With One Bad Decision. I am an idiot. I need to say that first, because what I'm about to tell y...</p>
+          <div class="btc-article-meta">June 24, 2026</span>
+            <span>8 min</span>
+          </div>
+        </div>
+      </a>
+<a class="btc-article-card" href="./blog/the-night-i-realized-my-alarm-was-ruining-my-life.html">
+        <img src="./images/blog/the-night-i-realized-my-alarm-was-ruining-my-life.jpg" alt="The Night I Realized My Alarm Was Ruining My Life | Bedtime Cycle" loading="lazy" width="800" height="450">
+        <div class="btc-article-card-body">
+          <span style="display: inline-block; background: var(--btc-accent-bg); color: var(--btc-accent); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Personal Story</span>
+          <h3>The Night I Realized My Alarm Was Ruining My Life | Bedtime Cycle</h3>
+          <p>I had been waking up to a blaring alarm for fifteen years. Then I learned what happens when you interrupt deep sleep.</p>
+          <div class="btc-article-meta">June 12, 2026</span>
+            <span>8 min</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+
+
+
+
+
+<!-- INDEX_ARTICLES_END -->
+    
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="./blog/index.html" class="btc-btn btc-btn-secondary">Read All Articles</a>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline Section — Pregnancy Journey Style but for Sleep -->
+<section class="btc-section">
+  <div class="btc-container" style="max-width: 800px;">
+    <h2 class="btc-section-title">Your Sleep Journey</h2>
+    <div class="btc-timeline">
+      <div class="btc-timeline-item">
+        <div class="btc-timeline-dot"></div>
+        <div class="btc-timeline-content">
+          <h4>Step 1: Calculate Your Cycle</h4>
+          <p>Use the Sleep Cycle Calculator to find your optimal bedtime based on your wake-up time.</p>
+        </div>
+      </div>
+      <div class="btc-timeline-item">
+        <div class="btc-timeline-dot"></div>
+        <div class="btc-timeline-content">
+          <h4>Step 2: Track for 7 Days</h4>
+          <p>Log your actual sleep times in the Bedtime Finder. See how reality compares to theory.</p>
+        </div>
+      </div>
+      <div class="btc-timeline-item">
+        <div class="btc-timeline-dot"></div>
+        <div class="btc-timeline-content">
+          <h4>Step 3: Adjust Gradually</h4>
+          <p>Shift your bedtime by 15 minutes every 3 days. Your circadian rhythm needs time to adapt.</p>
+        </div>
+      </div>
+      <div class="btc-timeline-item">
+        <div class="btc-timeline-dot"></div>
+        <div class="btc-timeline-content">
+          <h4>Step 4: Wake Up Without an Alarm</h4>
+          <p>Most people need 3-4 weeks. When you hit the right cycle, you will wake up before the alarm goes off.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Teaser -->
+<section class="btc-section btc-section-alt">
+  <div class="btc-container" style="max-width: 800px;">
+    <h2 class="btc-section-title">Common Questions</h2>
+    <div class="btc-faq-item">
+      <div class="btc-faq-question" onclick="this.nextElementSibling.classList.toggle('active')">
+        <span>Is my sleep data really private?</span>
+        <span style="font-size: 1.2rem;">+</span>
+      </div>
+      <div class="btc-faq-answer">
+        <p>Yes. All calculations happen in your browser. We do not have a database. We cannot see your bedtime, your sleep debt, or anything else you enter.</p>
+      </div>
+    </div>
+    <div class="btc-faq-item">
+      <div class="btc-faq-question" onclick="this.nextElementSibling.classList.toggle('active')">
+        <span>How accurate is the 90-minute cycle?</span>
+        <span style="font-size: 1.2rem;">+</span>
+      </div>
+      <div class="btc-faq-answer">
+        <p>It is an average. Individual cycles range from 80 to 120 minutes. Our calculator shows you a range of optimal bedtimes, not just one.</p>
+      </div>
+    </div>
+    <div class="btc-faq-item">
+      <div class="btc-faq-question" onclick="this.nextElementSibling.classList.toggle('active')">
+        <span>Can I use these tools if I have insomnia?</span>
+        <span style="font-size: 1.2rem;">+</span>
+      </div>
+      <div class="btc-faq-answer">
+        <p>Our tools help you understand patterns, but they are not a treatment. If you have chronic insomnia, please see a sleep specialist or CBT-I therapist.</p>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 24px;">
+      <a href="./faq.html" class="btc-btn btc-btn-secondary">Read All FAQs</a>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="btc-container">
+<div class="btc-ad-slot has-content" data-ad-slot="footer" style="width:100%;height:250px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8f4f8,#f0e8f4);color:#667;font-size:14px;font-family:Inter,Segoe UI,sans-serif;border-radius:8px;margin:20px 0;"><span>Advertisement — footer</span></div>
+</div>
+
+<!-- Footer -->
+<footer class="btc-footer">
+  <div class="btc-footer-grid">
+    <div>
+      <div class="btc-footer-brand">Bedtime Cycle</div>
+      <p class="btc-footer-desc">Science-backed sleep tools built by Dr. Sarah Mitchell in Boulder, Colorado. No sign-ups. No data collection. No BS.</p>
+    </div>
+    <div>
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="./tools/sleep-cycle-calculator.html">Sleep Cycle Calculator</a></li>
+        <li><a href="./tools/bedtime-finder.html">Bedtime Finder</a></li>
+        <li><a href="./tools/nap-planner.html">Nap Planner</a></li>
+        <li><a href="./tools/sleep-debt-tracker.html">Sleep Debt Tracker</a></li>
+        <li><a href="./tools/sleep-quality-score.html">Sleep Quality Score</a></li>
+        <li><a href="./tools/jet-lag-adjustor.html">Jet Lag Adjustor</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./blog/index.html">Blog</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+        <li><a href="./faq.html">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="./privacy.html">Privacy Policy</a></li>
+        <li><a href="./terms.html">Terms of Use</a></li>
+        <li><a href="./disclaimer.html">Medical Disclaimer</a></li>
+        <li><a href="./disclosure.html">Affiliate Disclosure</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="btc-footer-bottom">
+    <p>&copy; 2024–2026 Bedtime Cycle. All rights reserved. Not medical advice.</p>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button class="btc-back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+<script>
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 400) backToTop.classList.add('visible');
+  else backToTop.classList.remove('visible');
+});
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+
+<script src="./ads-loader.js"></script>
+</body>
+</html>
