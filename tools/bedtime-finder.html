@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bedtime Finder | Bedtime Cycle</title>
+<meta name="description" content="Find your ideal bedtime based on your current sleep habits and how you feel. Get a realistic adjustment plan with gradual shifts.">
+<link rel="stylesheet" href="../style.css">
+<link rel="canonical" href="https://bedtimecycle.com/tools/bedtime-finder.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a237e'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>Z</text></svg>">
+
+<meta property="og:title" content="Bedtime Finder | Bedtime Cycle">
+<meta property="og:description" content="Find your ideal bedtime based on current habits and desired wake time.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bedtimecycle.com/tools/bedtime-finder.html">
+<meta property="og:image" content="https://bedtimecycle.com/images/og-default.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Bedtime Finder",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bedtimecycle.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://bedtimecycle.com/tools/"},
+    {"@type": "ListItem", "position": 3, "name": "Bedtime Finder", "item": "https://bedtimecycle.com/tools/bedtime-finder.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="btc-nav">
+  <div class="btc-nav-inner">
+    <a href="../index.html" class="btc-logo"><span class="btc-logo-icon">Z</span>Bedtime Cycle</a>
+    <button class="btc-nav-toggle" onclick="document.querySelector('.btc-nav-links').classList.toggle('btc-mobile-open')" aria-label="Toggle menu">☰</button>
+    <ul class="btc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<nav class="btc-breadcrumb" aria-label="Breadcrumb">
+  <a href="../index.html">Home</a><span class="btc-breadcrumb-sep">/</span><a href="./index.html">Tools</a><span class="btc-breadcrumb-sep">/</span><span>Bedtime Finder</span>
+</nav>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_top"><span>Advertisement - tool_top</span></div>
+
+
+<div class="btc-tool-page">
+  <div class="btc-tool-header">
+    <h1>🕐 Bedtime Finder</h1>
+    <p>Tell us your current habits and how you feel in the morning. We will recommend a bedtime shift with a realistic 2-week adjustment plan.</p>
+  </div>
+
+  <div class="btc-tool-box">
+    <div class="btc-input-group">
+      <label for="currentBedtime">Current Bedtime</label>
+      <input type="time" id="currentBedtime" value="23:30">
+    </div>
+    <div class="btc-input-group">
+      <label for="currentWake">Current Wake Time</label>
+      <input type="time" id="currentWake" value="07:00">
+    </div>
+    <div class="btc-input-group">
+      <label for="desiredWake">Desired Wake Time</label>
+      <input type="time" id="desiredWake" value="06:30">
+    </div>
+    <div class="btc-input-group">
+      <label for="morningFeel">How do you feel in the morning?</label>
+      <select id="morningFeel">
+        <option value="exhausted">Exhausted — I hit snooze 5+ times</option>
+        <option value="tired" selected>Tired — I need coffee immediately</option>
+        <option value="okay">Okay — I wake up but need a few minutes</option>
+        <option value="good">Good — I wake up naturally most days</option>
+        <option value="great">Great — I wake up energized before the alarm</option>
+      </select>
+    </div>
+    <div class="btc-input-group">
+      <label for="ageGroup">Age Group</label>
+      <select id="ageGroup">
+        <option value="teen">13-17 (Teen)</option>
+        <option value="young" selected>18-25 (Young Adult)</option>
+        <option value="adult">26-64 (Adult)</option>
+        <option value="senior">65+ (Senior)</option>
+      </select>
+    </div>
+    <button class="btc-calculate-btn" onclick="findBedtime()">Find My Ideal Bedtime</button>
+    <button class="btc-reset-btn" onclick="resetFinder()">Reset</button>
+  </div>
+
+  <div class="btc-result-box" id="resultBox">
+    <h4>Your Personalized Bedtime Plan</h4>
+    <div id="finderResults"></div>
+    <div class="btc-chart-container">
+      <canvas id="adjustmentChart"></canvas>
+    </div>
+    <div style="margin-top: 20px;">
+      <button class="btc-export-btn" onclick="exportPlan()">📥 Export Plan</button>
+      <button class="btc-export-btn" onclick="saveToHistory()" style="margin-left: 8px;">💾 Save to History</button>
+    </div>
+  </div>
+
+  <div class="btc-tool-box" id="historyBox" style="display: none;">
+    <h4 style="margin-bottom: 16px;">Your Saved Plans</h4>
+    <table class="btc-history-table" id="historyTable">
+      <thead><tr><th>Date</th><th>Current</th><th>Target</th><th>Plan</th><th></th></tr></thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+    <button class="btc-reset-btn" onclick="clearHistory()" style="margin-top: 12px;">Clear All History</button>
+  </div>
+</div>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_middle"><span>Advertisement - tool_middle</span></div>
+
+
+<section class="btc-section" style="padding-top: 0;">
+  <div class="btc-container" style="max-width: 800px;">
+    <div class="btc-tool-info">
+      <h2>How It Works</h2>
+      <p>The Bedtime Finder uses a simple but powerful formula based on sleep science research:</p>
+      <ol>
+        <li><strong>Age-based sleep need:</strong> We start with recommended sleep duration by age group (teens 9h, young adults 8h, adults 7.5h, seniors 7h).</li>
+        <li><strong>Morning feel adjustment:</strong> If you feel exhausted, we add 1 hour. If you feel great, we subtract 15–30 minutes. Your subjective feeling is a reliable indicator of sleep need.</li>
+        <li><strong>Backward calculation:</strong> From your desired wake-up time, we subtract your adjusted sleep need to find your target bedtime.</li>
+        <li><strong>Gradual shift plan:</strong> We spread the difference between your current and target bedtime over 14 days, shifting 15–20 minutes every 3 days. Your circadian rhythm adapts best to small, consistent changes.</li>
+      </ol>
+      <p><strong>Pro tip:</strong> The chart shows your bedtime trajectory. If the shift feels too fast, extend the plan to 21 days by manually shifting 10 minutes per day.</p>
+    </div>
+  </div>
+</section>
+
+<section class="btc-section" style="padding-top: 0;">
+  <div class="btc-container">
+    <div class="btc-post-footer-grid">
+      <div>
+        <h3>Related Articles</h3>
+        <a href="../blog/how-to-shift-your-bedtime-by-2-hours.html" class="btc-related-card">
+          <h4>How to Shift Your Bedtime by 2 Hours</h4>
+          <p>The 15-minute rule. Shift gradually, not overnight.</p>
+        </a>
+        <a href="../blog/how-i-tracked-847-mornings.html" class="btc-related-card">
+          <h4>How I Tracked 847 Mornings</h4>
+          <p>Three years of data. One spreadsheet.</p>
+        </a>
+      </div>
+      <div>
+        <h3>Recommended Tools</h3>
+        <a href="./sleep-cycle-calculator.html" class="btc-related-card">
+          <h4>🌙 Sleep Cycle Calculator</h4>
+          <p>Calculate optimal bedtimes based on 90-minute cycles.</p>
+        </a>
+        <a href="./sleep-debt-tracker.html" class="btc-related-card">
+          <h4>📊 Sleep Debt Tracker</h4>
+          <p>Track your accumulated sleep debt over time.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_bottom"><span>Advertisement - tool_bottom</span></div>
+
+
+<footer class="btc-footer">
+  <div class="btc-footer-grid">
+    <div><div class="btc-footer-brand">Bedtime Cycle</div><p class="btc-footer-desc">Science-backed sleep tools built by Dr. Sarah Mitchell in Boulder, Colorado.</p></div>
+    <div><h4>Tools</h4><ul><li><a href="./sleep-cycle-calculator.html">Sleep Cycle Calculator</a></li><li><a href="./bedtime-finder.html">Bedtime Finder</a></li><li><a href="./nap-planner.html">Nap Planner</a></li></ul></div>
+    <div><h4>Site</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li></ul></div>
+    <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+  </div>
+  <div class="btc-footer-bottom"><p>&copy; 2026 Bedtime Cycle. All rights reserved.</p></div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+function findBedtime() {
+  const currentBedtime = document.getElementById('currentBedtime').value;
+  const currentWake = document.getElementById('currentWake').value;
+  const desiredWake = document.getElementById('desiredWake').value;
+  const morningFeel = document.getElementById('morningFeel').value;
+  const ageGroup = document.getElementById('ageGroup').value;
+
+  if (!currentBedtime || !currentWake || !desiredWake) {
+    alert('Please fill in all time fields');
+    return;
+  }
+
+  const [cbHour, cbMin] = currentBedtime.split(':').map(Number);
+  const [cwHour, cwMin] = currentWake.split(':').map(Number);
+  const [dwHour, dwMin] = desiredWake.split(':').map(Number);
+
+  const currentSleepMin = ((cwHour * 60 + cwMin) - (cbHour * 60 + cbMin) + 24 * 60) % (24 * 60);
+  const desiredSleepMin = ((dwHour * 60 + dwMin) - (cbHour * 60 + cbMin) + 24 * 60) % (24 * 60);
+
+  // Recommended sleep by age
+  const sleepNeeds = { teen: 540, young: 480, adult: 450, senior: 420 };
+  const recommendedSleep = sleepNeeds[ageGroup];
+
+  // Adjust based on morning feel
+  const feelAdjust = { exhausted: 60, tired: 30, okay: 0, good: -15, great: -30 };
+  const adjustedSleep = recommendedSleep + feelAdjust[morningFeel];
+
+  const targetBedtimeMin = ((dwHour * 60 + dwMin) - adjustedSleep + 24 * 60) % (24 * 60);
+  const targetBedtime = formatTime(targetBedtimeMin);
+
+  // Generate 2-week plan
+  const currentBedtimeMin = cbHour * 60 + cbMin;
+  const diff = targetBedtimeMin - currentBedtimeMin;
+  const shiftPerDay = diff / 14;
+
+  let plan = '<div style="background: var(--btc-bg); border-radius: var(--btc-radius-sm); padding: 20px; margin-bottom: 20px;">';
+  plan += '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">';
+  plan += '<div><strong style="color: var(--btc-primary);">Current Sleep:</strong><br>' + formatDuration(currentSleepMin) + '</div>';
+  plan += '<div><strong style="color: var(--btc-primary);">Recommended Sleep:</strong><br>' + formatDuration(adjustedSleep) + '</div>';
+  plan += '</div>';
+  plan += '<div style="background: var(--btc-accent-bg); border: 1px solid var(--btc-accent); border-radius: var(--btc-radius-sm); padding: 16px; margin-bottom: 16px;">';
+  plan += '<strong style="color: var(--btc-primary);">Target Bedtime: ' + targetBedtime + '</strong><br>';
+  plan += '<span style="font-size: 0.9rem; color: var(--btc-text-muted);">For a ' + formatDuration(adjustedSleep) + ' sleep to wake at ' + desiredWake + '</span>';
+  plan += '</div>';
+  plan += '</div>';
+
+  plan += '<h4 style="margin-bottom: 12px;">14-Day Adjustment Plan</h4>';
+  plan += '<div style="display: grid; gap: 8px;">';
+  for (let day = 1; day <= 14; day++) {
+    const newBedtimeMin = Math.round(currentBedtimeMin + shiftPerDay * day);
+    const adjusted = (newBedtimeMin + 24 * 60) % (24 * 60);
+    const isWeekend = day % 7 === 0 || day % 7 === 6;
+    plan += '<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: ' + (isWeekend ? 'var(--btc-accent-bg)' : 'var(--btc-surface)') + '; border: 1px solid var(--btc-border); border-radius: var(--btc-radius-sm);">';
+    plan += '<span><strong>Day ' + day + '</strong> ' + (isWeekend ? '(weekend)' : '') + '</span>';
+    plan += '<span style="font-weight: 600; color: var(--btc-primary);">' + formatTime(adjusted) + '</span>';
+    plan += '</div>';
+  }
+  plan += '</div>';
+
+  document.getElementById('finderResults').innerHTML = plan;
+  document.getElementById('resultBox').classList.add('active');
+
+  drawAdjustmentChart(currentBedtimeMin, targetBedtimeMin, 14);
+}
+
+function formatTime(minutes) {
+  const h = Math.floor(minutes / 60) % 24;
+  const m = minutes % 60;
+  const period = h >= 12 ? 'PM' : 'AM';
+  const dh = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+  return String(dh).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ' ' + period;
+}
+
+function formatDuration(minutes) {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return h + 'h ' + (m > 0 ? m + 'm' : '');
+}
+
+function drawAdjustmentChart(start, target, days) {
+  const canvas = document.getElementById('adjustmentChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 250 * dpr;
+  ctx.scale(dpr, dpr);
+
+  const w = rect.width;
+  const h = 250;
+  const padding = 40;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Title
+  ctx.font = 'bold 14px Inter';
+  ctx.fillStyle = '#1a237e';
+  ctx.textAlign = 'center';
+  ctx.fillText('14-Day Bedtime Shift', w / 2, 20);
+
+  // Draw line
+  const diff = target - start;
+  const stepX = (w - padding * 2) / (days - 1);
+  const minY = Math.min(start, target) - 30;
+  const maxY = Math.max(start, target) + 30;
+  const range = maxY - minY;
+
+  ctx.beginPath();
+  ctx.strokeStyle = '#1a237e';
+  ctx.lineWidth = 3;
+  for (let i = 0; i < days; i++) {
+    const x = padding + i * stepX;
+    const y = h - padding - ((start + (diff / days) * i - minY) / range) * (h - padding * 2 - 30);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Draw points
+  for (let i = 0; i < days; i += 3) {
+    const x = padding + i * stepX;
+    const y = h - padding - ((start + (diff / days) * i - minY) / range) * (h - padding * 2 - 30);
+    ctx.beginPath();
+    ctx.fillStyle = '#ff6f00';
+    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Labels
+  ctx.fillStyle = '#6b6b6b';
+  ctx.font = '11px Inter';
+  ctx.textAlign = 'center';
+  ctx.fillText('Day 1', padding, h - 10);
+  ctx.fillText('Day 7', padding + stepX * 6, h - 10);
+  ctx.fillText('Day 14', w - padding, h - 10);
+}
+
+function resetFinder() {
+  document.getElementById('currentBedtime').value = '23:30';
+  document.getElementById('currentWake').value = '07:00';
+  document.getElementById('desiredWake').value = '06:30';
+  document.getElementById('morningFeel').value = 'tired';
+  document.getElementById('ageGroup').value = 'young';
+  document.getElementById('resultBox').classList.remove('active');
+  document.getElementById('finderResults').innerHTML = '';
+  const canvas = document.getElementById('adjustmentChart');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function exportPlan() {
+  const results = document.getElementById('finderResults').innerText;
+  const blob = new Blob(['Bedtime Finder Plan\n\n' + results + '\n\nGenerated by bedtimecycle.com'], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'bedtime-plan.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function saveToHistory() {
+  const currentBedtime = document.getElementById('currentBedtime').value;
+  const desiredWake = document.getElementById('desiredWake').value;
+  let history = JSON.parse(localStorage.getItem('btc_bedtimeFinderHistory') || '[]');
+  history.unshift({ date: new Date().toLocaleDateString(), current: currentBedtime, target: desiredWake, plan: '14-day shift' });
+  if (history.length > 20) history = history.slice(0, 20);
+  localStorage.setItem('btc_bedtimeFinderHistory', JSON.stringify(history));
+  renderHistory();
+  alert('Saved to history!');
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem('btc_bedtimeFinderHistory') || '[]');
+  if (history.length === 0) { document.getElementById('historyBox').style.display = 'none'; return; }
+  document.getElementById('historyBox').style.display = 'block';
+  const tbody = document.getElementById('historyBody');
+  tbody.innerHTML = '';
+  history.forEach((item, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + item.date + '</td><td>' + item.current + '</td><td>' + item.target + '</td><td>' + item.plan + '</td><td><button onclick="deleteItem(' + i + ')" style="background: none; border: none; color: var(--btc-error); cursor: pointer;">✕</button></td>';
+    tbody.appendChild(tr);
+  });
+}
+
+function deleteItem(index) {
+  let history = JSON.parse(localStorage.getItem('btc_bedtimeFinderHistory') || '[]');
+  history.splice(index, 1);
+  localStorage.setItem('btc_bedtimeFinderHistory', JSON.stringify(history));
+  renderHistory();
+}
+
+function clearHistory() {
+  if (confirm('Clear all saved plans?')) {
+    localStorage.removeItem('btc_bedtimeFinderHistory');
+    renderHistory();
+  }
+}
+
+renderHistory();
+window.addEventListener('resize', function() {
+  if (document.getElementById('resultBox').classList.contains('active')) findBedtime();
+});
+</script>
+</body>
+</html>
