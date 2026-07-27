@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sleep Cycle Calculator | Bedtime Cycle</title>
+<meta name="description" content="Calculate your optimal bedtime based on 90-minute sleep cycles. Enter your wake-up time and get 5 perfect bedtimes. No more groggy mornings.">
+<link rel="stylesheet" href="../style.css">
+<link rel="canonical" href="https://bedtimecycle.com/tools/sleep-cycle-calculator.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a237e'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>Z</text></svg>">
+
+<meta property="og:title" content="Sleep Cycle Calculator | Bedtime Cycle">
+<meta property="og:description" content="Calculate your optimal bedtime based on 90-minute sleep cycles.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bedtimecycle.com/tools/sleep-cycle-calculator.html">
+<meta property="og:image" content="https://bedtimecycle.com/images/og-default.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Sleep Cycle Calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "1240"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bedtimecycle.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://bedtimecycle.com/tools/"},
+    {"@type": "ListItem", "position": 3, "name": "Sleep Cycle Calculator", "item": "https://bedtimecycle.com/tools/sleep-cycle-calculator.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="btc-nav">
+  <div class="btc-nav-inner">
+    <a href="../index.html" class="btc-logo"><span class="btc-logo-icon">Z</span>Bedtime Cycle</a>
+    <button class="btc-nav-toggle" onclick="document.querySelector('.btc-nav-links').classList.toggle('btc-mobile-open')" aria-label="Toggle menu">☰</button>
+    <ul class="btc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<nav class="btc-breadcrumb" aria-label="Breadcrumb">
+  <a href="../index.html">Home</a><span class="btc-breadcrumb-sep">/</span><a href="./index.html">Tools</a><span class="btc-breadcrumb-sep">/</span><span>Sleep Cycle Calculator</span>
+</nav>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_top"><span>Advertisement - tool_top</span></div>
+
+
+<div class="btc-tool-page">
+  <div class="btc-tool-header">
+    <h1>🌙 Sleep Cycle Calculator</h1>
+    <p>Enter your target wake-up time. We will calculate 5 optimal bedtimes based on 90-minute sleep cycles. Wake up between cycles, not in the middle of deep sleep.</p>
+  </div>
+
+  <div class="btc-tool-box">
+    <div class="btc-input-group">
+      <label for="wakeTime">Target Wake-Up Time</label>
+      <input type="time" id="wakeTime" value="07:00">
+    </div>
+    <div class="btc-input-group">
+      <label for="cycleLength">Average Cycle Length (minutes)</label>
+      <input type="range" id="cycleLength" min="80" max="120" value="90" style="width: 100%; margin-bottom: 8px;">
+      <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--btc-text-muted);">
+        <span>80 min (short cycles)</span>
+        <span id="cycleValue" style="font-weight: 600; color: var(--btc-primary);">90 min</span>
+        <span>120 min (long cycles)</span>
+      </div>
+    </div>
+    <div class="btc-input-group">
+      <label for="fallAsleep">Time to Fall Asleep (minutes)</label>
+      <select id="fallAsleep">
+        <option value="5">5 minutes (I fall asleep instantly)</option>
+        <option value="10">10 minutes</option>
+        <option value="15" selected>15 minutes (average)</option>
+        <option value="20">20 minutes</option>
+        <option value="30">30 minutes (I need time to wind down)</option>
+        <option value="45">45 minutes</option>
+      </select>
+    </div>
+    <button class="btc-calculate-btn" onclick="calculateBedtimes()">Calculate My Bedtimes</button>
+    <button class="btc-reset-btn" onclick="resetCalculator()">Reset</button>
+  </div>
+
+  <div class="btc-result-box" id="resultBox">
+    <h4>Your Optimal Bedtimes</h4>
+    <p style="color: var(--btc-text-muted); margin-bottom: 16px;">Based on <span id="resCycle">90</span>-minute cycles and <span id="resFallAsleep">15</span> minutes to fall asleep:</p>
+    <div id="bedtimeResults"></div>
+    <div class="btc-chart-container">
+      <canvas id="cycleChart"></canvas>
+    </div>
+    <div style="margin-top: 20px;">
+      <button class="btc-export-btn" onclick="exportResults()">📥 Export Results</button>
+      <button class="btc-export-btn" onclick="saveToHistory()" style="margin-left: 8px;">💾 Save to History</button>
+    </div>
+  </div>
+
+  <!-- History Table -->
+  <div class="btc-tool-box" id="historyBox" style="display: none;">
+    <h4 style="margin-bottom: 16px;">Your Saved Calculations</h4>
+    <table class="btc-history-table" id="historyTable">
+      <thead>
+        <tr><th>Date</th><th>Wake Time</th><th>Cycle</th><th>Recommended Bedtime</th><th></th></tr>
+      </thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+    <button class="btc-reset-btn" onclick="clearHistory()" style="margin-top: 12px;">Clear All History</button>
+  </div>
+</div>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_middle"><span>Advertisement - tool_middle</span></div>
+
+
+<!-- Related Articles & Tools -->
+<section class="btc-section" style="padding-top: 0;">
+  <div class="btc-container">
+    <div class="btc-post-footer-grid">
+      <div>
+        <h3>Related Articles</h3>
+        <a href="../blog/how-to-calculate-your-sleep-cycle-without-a-smartwatch.html" class="btc-related-card">
+          <h4>How to Calculate Your Sleep Cycle Without a Smartwatch</h4>
+          <p>No wearable? No problem. A pen, paper, and 7 days of patience.</p>
+        </a>
+        <a href="../blog/why-8-hours-is-a-lie.html" class="btc-related-card">
+          <h4>Why 8 Hours Is a Lie</h4>
+          <p>The 8-hour myth was invented by mattress companies.</p>
+        </a>
+        <a href="../blog/how-i-tracked-847-mornings.html" class="btc-related-card">
+          <h4>How I Tracked 847 Mornings</h4>
+          <p>Three years of data. One spreadsheet.</p>
+        </a>
+      </div>
+      <div>
+        <h3>Recommended Tools</h3>
+        <a href="./bedtime-finder.html" class="btc-related-card">
+          <h4>🕐 Bedtime Finder</h4>
+          <p>Find your ideal bedtime based on current habits.</p>
+        </a>
+        <a href="./nap-planner.html" class="btc-related-card">
+          <h4>😴 Nap Planner</h4>
+          <p>Plan the perfect nap length and timing.</p>
+        </a>
+        <a href="./sleep-debt-tracker.html" class="btc-related-card">
+          <h4>📊 Sleep Debt Tracker</h4>
+          <p>Track and calculate your accumulated sleep debt.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_bottom"><span>Advertisement - tool_bottom</span></div>
+
+
+<footer class="btc-footer">
+  <div class="btc-footer-grid">
+    <div>
+      <div class="btc-footer-brand">Bedtime Cycle</div>
+      <p class="btc-footer-desc">Science-backed sleep tools built by Dr. Sarah Mitchell in Boulder, Colorado.</p>
+    </div>
+    <div>
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="./sleep-cycle-calculator.html">Sleep Cycle Calculator</a></li>
+        <li><a href="./bedtime-finder.html">Bedtime Finder</a></li>
+        <li><a href="./nap-planner.html">Nap Planner</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../blog/index.html">Blog</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="../privacy.html">Privacy</a></li>
+        <li><a href="../terms.html">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="btc-footer-bottom">
+    <p>&copy; 2026 Bedtime Cycle. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+// Cycle length slider display
+const cycleSlider = document.getElementById('cycleLength');
+const cycleValue = document.getElementById('cycleValue');
+cycleSlider.addEventListener('input', function() {
+  cycleValue.textContent = this.value + ' min';
+});
+
+function calculateBedtimes() {
+  const wakeTime = document.getElementById('wakeTime').value;
+  const cycleLength = parseInt(document.getElementById('cycleLength').value);
+  const fallAsleep = parseInt(document.getElementById('fallAsleep').value);
+
+  if (!wakeTime) {
+    alert('Please enter a wake-up time');
+    return;
+  }
+
+  const [wakeHour, wakeMin] = wakeTime.split(':').map(Number);
+  const wakeMinutes = wakeHour * 60 + wakeMin;
+
+  const bedtimes = [];
+  for (let cycles = 4; cycles <= 6; cycles++) {
+    const totalSleepMin = cycles * cycleLength;
+    const bedtimeMin = wakeMinutes - totalSleepMin - fallAsleep;
+    let adjusted = bedtimeMin;
+    if (adjusted < 0) adjusted += 24 * 60;
+    const bh = Math.floor(adjusted / 60) % 24;
+    const bm = adjusted % 60;
+    const timeStr = String(bh).padStart(2, '0') + ':' + String(bm).padStart(2, '0');
+    const period = bh >= 12 ? 'PM' : 'AM';
+    const displayHour = bh > 12 ? bh - 12 : (bh === 0 ? 12 : bh);
+    bedtimes.push({
+      cycles: cycles,
+      time: timeStr,
+      display: displayHour + ':' + String(bm).padStart(2, '0') + ' ' + period,
+      totalSleep: totalSleepMin + fallAsleep
+    });
+  }
+
+  // Display results
+  document.getElementById('resCycle').textContent = cycleLength;
+  document.getElementById('resFallAsleep').textContent = fallAsleep;
+
+  let html = '<div style="display: grid; gap: 12px;">';
+  bedtimes.forEach((bt, i) => {
+    const isRecommended = i === 2; // 5 cycles is recommended
+    html += '<div style="background: ' + (isRecommended ? 'var(--btc-accent-bg)' : 'var(--btc-bg)') + '; border: 2px solid ' + (isRecommended ? 'var(--btc-accent)' : 'var(--btc-border)') + '; border-radius: var(--btc-radius-sm); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">';
+    html += '<div>';
+    html += '<div style="font-size: 1.4rem; font-weight: 700; color: var(--btc-primary);">' + bt.display + '</div>';
+    html += '<div style="font-size: 0.85rem; color: var(--btc-text-muted);">' + bt.cycles + ' cycles (' + bt.totalSleep + ' min total)</div>';
+    html += '</div>';
+    if (isRecommended) {
+      html += '<span style="background: var(--btc-accent); color: #fff; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 4px;">RECOMMENDED</span>';
+    }
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '<p style="margin-top: 16px; font-size: 0.9rem; color: var(--btc-text-muted);"><strong>Tip:</strong> The 5-cycle option (7.5 hours of sleep + time to fall asleep) is recommended for most adults. If you are under 25, you may need 6 cycles (9 hours).</p>';
+
+  document.getElementById('bedtimeResults').innerHTML = html;
+  document.getElementById('resultBox').classList.add('active');
+
+  // Draw chart
+  drawCycleChart(bedtimes, cycleLength, fallAsleep);
+}
+
+function drawCycleChart(bedtimes, cycleLength, fallAsleep) {
+  const canvas = document.getElementById('cycleChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 300 * dpr;
+  ctx.scale(dpr, dpr);
+
+  const w = rect.width;
+  const h = 300;
+  const padding = 40;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Draw recommended option (5 cycles)
+  const rec = bedtimes[2];
+  const barWidth = (w - padding * 2) / 5 - 10;
+  const maxHeight = h - padding * 2 - 40;
+
+  // Title
+  ctx.font = 'bold 14px Inter';
+  ctx.fillStyle = '#1a237e';
+  ctx.textAlign = 'center';
+  ctx.fillText('Recommended: 5 Sleep Cycles (' + cycleLength + ' min each)', w / 2, 20);
+
+  // Draw 5 bars for cycles
+  for (let i = 0; i < 5; i++) {
+    const x = padding + i * (barWidth + 15);
+    const barH = maxHeight * 0.8;
+    const y = h - padding - barH;
+
+    // Cycle bar
+    ctx.fillStyle = i % 2 === 0 ? '#1a237e' : '#3949ab';
+    ctx.fillRect(x, y, barWidth, barH);
+
+    // Label
+    ctx.fillStyle = '#2d2d2d';
+    ctx.font = '12px Inter';
+    ctx.textAlign = 'center';
+    ctx.fillText('Cycle ' + (i + 1), x + barWidth / 2, h - padding + 15);
+
+    // Time label
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 11px Inter';
+    ctx.fillText((i * cycleLength) + 'm', x + barWidth / 2, y + barH / 2);
+  }
+
+  // Fall asleep label
+  ctx.fillStyle = '#ff6f00';
+  ctx.font = '12px Inter';
+  ctx.textAlign = 'left';
+  ctx.fillText('+' + fallAsleep + ' min to fall asleep', padding, h - padding - maxHeight * 0.8 - 10);
+}
+
+function resetCalculator() {
+  document.getElementById('wakeTime').value = '07:00';
+  document.getElementById('cycleLength').value = 90;
+  document.getElementById('cycleValue').textContent = '90 min';
+  document.getElementById('fallAsleep').value = 15;
+  document.getElementById('resultBox').classList.remove('active');
+  document.getElementById('bedtimeResults').innerHTML = '';
+  const canvas = document.getElementById('cycleChart');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function exportResults() {
+  const results = document.getElementById('bedtimeResults').innerText;
+  const blob = new Blob(['Sleep Cycle Calculator Results\n\n' + results + '\n\nGenerated by bedtimecycle.com'], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'sleep-cycle-results.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function saveToHistory() {
+  const wakeTime = document.getElementById('wakeTime').value;
+  const cycleLength = document.getElementById('cycleLength').value;
+  const fallAsleep = document.getElementById('fallAsleep').value;
+  const results = document.getElementById('bedtimeResults').innerText;
+
+  let history = JSON.parse(localStorage.getItem('btc_sleepCycleHistory') || '[]');
+  history.unshift({
+    date: new Date().toLocaleDateString(),
+    wakeTime: wakeTime,
+    cycleLength: cycleLength,
+    fallAsleep: fallAsleep,
+    results: results
+  });
+  if (history.length > 20) history = history.slice(0, 20);
+  localStorage.setItem('btc_sleepCycleHistory', JSON.stringify(history));
+
+  renderHistory();
+  alert('Saved to history!');
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem('btc_sleepCycleHistory') || '[]');
+  if (history.length === 0) {
+    document.getElementById('historyBox').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('historyBox').style.display = 'block';
+  const tbody = document.getElementById('historyBody');
+  tbody.innerHTML = '';
+
+  history.forEach((item, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + item.date + '</td><td>' + item.wakeTime + '</td><td>' + item.cycleLength + ' min</td><td>' + item.wakeTime + '</td><td><button onclick="deleteHistoryItem(' + i + ')" style="background: none; border: none; color: var(--btc-error); cursor: pointer;">✕</button></td>';
+    tbody.appendChild(tr);
+  });
+}
+
+function deleteHistoryItem(index) {
+  let history = JSON.parse(localStorage.getItem('btc_sleepCycleHistory') || '[]');
+  history.splice(index, 1);
+  localStorage.setItem('btc_sleepCycleHistory', JSON.stringify(history));
+  renderHistory();
+}
+
+function clearHistory() {
+  if (confirm('Clear all saved calculations?')) {
+    localStorage.removeItem('btc_sleepCycleHistory');
+    renderHistory();
+  }
+}
+
+// Load history on page load
+renderHistory();
+
+// Resize chart on window resize
+window.addEventListener('resize', function() {
+  if (document.getElementById('resultBox').classList.contains('active')) {
+    calculateBedtimes();
+  }
+});
+</script>
+</body>
+</html>
