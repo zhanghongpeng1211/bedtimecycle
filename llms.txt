@@ -1,0 +1,49 @@
+# bedtimecycle.com
+
+Free online calculators and educational content. Not professional advice.
+
+## Pages
+- Home: https://bedtimecycle.com/
+- Tools: https://bedtimecycle.com/tools/
+- Blog: https://bedtimecycle.com/blog/
+- About: https://bedtimecycle.com/about.html
+- Contact: https://bedtimecycle.com/contact.html
+- FAQ: https://bedtimecycle.com/faq.html
+- Sitemap: https://bedtimecycle.com/sitemap.html
+
+## Tools
+- Bedtime Finder | Bedtime Cycle: https://bedtimecycle.com/tools/bedtime-finder.html
+- Jet Lag Adjustor | Bedtime Cycle: https://bedtimecycle.com/tools/jet-lag-adjustor.html
+- Nap Planner | Bedtime Cycle: https://bedtimecycle.com/tools/nap-planner.html
+- Sleep Cycle Calculator | Bedtime Cycle: https://bedtimecycle.com/tools/sleep-cycle-calculator.html
+- Sleep Debt Tracker | Bedtime Cycle: https://bedtimecycle.com/tools/sleep-debt-tracker.html
+- Sleep Quality Score | Bedtime Cycle: https://bedtimecycle.com/tools/sleep-quality-score.html
+
+## Articles
+- Sleep Deprivation Health Costs 2026 (sleep-deprivation-health-costs-2026) -- I tracked my sleep for 30 days. Not just hours. Quality. Deep sleep percentage. REM cycles. Wake events. My watch gave me a "sleep score" every morning. And at the end of the month, I went to my docto -- July 23, 2026
+- Boulder Heat Wave Sleep Tracker Lies (boulder-heat-wave-sleep-tracker-lies) -- Why My Sleep Tracker Lied to Me Every Night of the Boulder Heat Wave Dr. Sarah Mitchell At 3:14 AM last Wednesday, I was staring at the ceiling of my bedroom in Boulder, watching the numbers on my sle -- July 06, 2026
+- Woke Up 447 Am 30 Days Sleep Score Down (woke-up-447-am-30-days-sleep-score-down) -- The alarm went off at 4:47 AM because 5:00 felt too round, too obvious, too much like giving up. I had read the books. I had watched the YouTube videos. I had seen the testimonials from CEOs and athle -- July 06, 2026
+- Why My 7 Year Old Outsmarted My Sleep Routine (why-my-7-year-old-outsmarted-my-sleep-routine) -- Why My 7-Year-Old Outsmarted My Sleep Routine (And What I Did About It) It was 9:47 PM on a Tuesday in Boulder, and Leo was still awake. Not just awake — awake and negotiating. He had already asked fo -- June 26, 2026
+- I Tracked My Sleep For 847 Mornings Then I Ruined It With (i-tracked-my-sleep-for-847-mornings-then-i-ruined-it-with) -- I Tracked My Sleep for 847 Mornings. Then I Ruined It With One Bad Decision. I am an idiot. I need to say that first, because what I'm about to tell you involves a PhD in behavioral neuroscience, twel -- June 24, 2026
+- The Night I Realized My Alarm Was Ruining My Life | Bedtime Cycle (the-night-i-realized-my-alarm-was-ruining-my-life) -- I had been waking up to a blaring alarm for fifteen years. Then I learned what happens when you interrupt deep sleep. -- June 12, 2026
+- How to Calculate Your Sleep Cycle Without a Smartwatch | Bedtime Cycle (how-to-calculate-your-sleep-cycle-without-a-smartwatch) -- No wearable? No problem. A pen, paper, and 7 days of patience is all you need to find your natural cycle length. -- June 11, 2026
+- REM vs. Deep Sleep: Why the Cycle Order Matters | Bedtime Cycle (rem-vs-deep-sleep-why-the-cycle-order-matters) -- Deep sleep comes first. REM comes later. Interrupt the order and you wake up feeling like a zombie. -- June 10, 2026
+- The Perfect Nap: How Long, When, and Why | Bedtime Cycle (the-perfect-nap-how-long-when-and-why) -- 20 minutes or 90 minutes. Nothing in between. Here is the exact science of napping without grogginess. -- June 09, 2026
+- I Tried 4 Sleep Tracking Apps for 30 Days. Here's the Honest Data. | Bedtime Cycle (i-tried-4-sleep-tracking-apps-for-30-days) -- One app said I got 8.2 hours. Another said 6.4. I wore a polysomnography headband to find the truth. -- June 08, 2026
+- How to Adjust Your Sleep Before a Time Zone Change (Jet Lag Tool) | Bedtime Cycle (how-to-adjust-your-sleep-before-a-time-zone-change) -- Start adjusting three days before your flight. Here is the exact light exposure schedule for east vs west travel. -- June 07, 2026
+- The 20-Minute Nap Rule: Why Less Is More | Bedtime Cycle (the-20-minute-nap-rule-why-less-is-more) -- I napped for 90 minutes every day for a month. Then I tried 20 minutes. The data was shocking. -- June 06, 2026
+- Circadian Rhythm vs. Sleep Homeostasis: The Two Forces Fighting Inside You | Bedtime Cycle (circadian-rhythm-vs-sleep-homeostasis) -- Your body wants to sleep because it is tired. Your brain wants to sleep because it is dark. They do not always agree. -- June 05, 2026
+- Your Sleep Debt Score: A 7-Day Tracker Challenge | Bedtime Cycle (your-sleep-debt-score-a-7-day-tracker-challenge) -- Most people are sleep-bankrupt. Track your debt for 7 days and see exactly how much sleep you owe. -- June 04, 2026
+- The Sleep Quality Score: What Your Number Actually Means | Bedtime Cycle (the-sleep-quality-score) -- Your fitness watch gave you a sleep score of 82. Do you know what that actually means? Probably not. -- June 03, 2026
+- How I Tracked 847 Mornings and Found My Perfect Bedtime | Bedtime Cycle (how-i-tracked-847-mornings) -- Eight hundred and forty-seven mornings. That is not a typo. I literally tracked every single wake-up for over two years. -- June 02, 2026
+- How to Shift Your Bedtime by 2 Hours Without Feeling Like Death | Bedtime Cycle (how-to-shift-your-bedtime-by-2-hours) -- Stop trying to go to bed earlier. You are doing it backwards. The 15-minute rule is the only thing that works. -- June 01, 2026
+- Mattress Firmness and Sleep Quality: What the Research Actually Says | Bedtime Cycle (mattress-firmness-and-sleep-quality) -- Did you spend three thousand dollars on a mattress because a salesperson told you it would change your life? -- May 31, 2026
+- Mark's Story: From 6 Alarms to 1 Natural Wake-Up | Bedtime Cycle (marks-story-from-6-alarms-to-1-natural-wake-up) -- I set six alarms. Every single morning. That is what Mark told me in his first session. -- May 30, 2026
+- Find Your Natural Bedtime: A 7-Day Experiment | Bedtime Cycle (find-your-natural-bedtime-a-7-day-experiment) -- I am just not a morning person. That is what I said for thirty years. Then I did this experiment. -- May 29, 2026
+- Why Power Naps Make You Groggy (And How to Fix It) | Bedtime Cycle (why-power-naps-make-you-groggy) -- I used to set a thirty-minute nap alarm. I always woke up worse. Here is why, and how to fix it. -- May 28, 2026
+- Sleep Debt Forgiveness: A Realistic Plan (Not "Just Sleep More") | Bedtime Cycle (sleep-debt-forgiveness-a-realistic-plan) -- I will catch up on sleep when I am dead. That is what my brother texts me. Here is a realistic plan instead. -- May 27, 2026
+- Why 8 Hours Is a Lie: The Case for Cycle-Based Sleep | Bedtime Cycle (why-8-hours-is-a-lie) -- Who decided eight hours was the magic number? Let me guess — someone who never had kids. -- May 26, 2026
+- A Night Nurse's Guide to Sleeping During the Day | Bedtime Cycle (a-night-nurses-guide-to-sleeping-during-the-day) -- Shift workers have a forty percent higher risk of sleep disorders. I talked to one who figured it out. -- May 25, 2026
+- How to Beat Jet Lag Without Prescription Drugs | Bedtime Cycle (how-to-beat-jet-lag-without-prescription-drugs) -- Landing at London Heathrow at 9 AM. Your body thinks it is 2 AM. Here is what you do before you even get off the plane. -- May 24, 2026
+- What Having a Kid Did to My Sleep Cycles (And How I Fixed It) | Bedtime Cycle (what-having-a-kid-did-to-my-sleep-cycles) -- I have a PhD in sleep. And I still spent the first six months of Leo's life waking up to a vibrating phone under my pillow. -- May 23, 2026
+- Reading Your Sleep Debt: When to Catch Up and When to Let It Go | Bedtime Cycle (reading-your-sleep-debt) -- I will sleep when I am dead. A text from my brother, 11 PM, last Tuesday. I did not respond. I was too tired to argue. -- May 22, 2026
