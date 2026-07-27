@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sleep Debt Tracker | Bedtime Cycle</title>
+<meta name="description" content="Track your sleep debt over time. Log your actual sleep vs your goal and see your accumulated deficit with charts and repayment plans.">
+<link rel="stylesheet" href="../style.css">
+<link rel="canonical" href="https://bedtimecycle.com/tools/sleep-debt-tracker.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a237e'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>Z</text></svg>">
+
+<meta property="og:title" content="Sleep Debt Tracker | Bedtime Cycle">
+<meta property="og:description" content="Track your sleep debt over time. Log actual sleep vs goal.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bedtimecycle.com/tools/sleep-debt-tracker.html">
+<meta property="og:image" content="https://bedtimecycle.com/images/og-default.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Sleep Debt Tracker",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bedtimecycle.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://bedtimecycle.com/tools/"},
+    {"@type": "ListItem", "position": 3, "name": "Sleep Debt Tracker", "item": "https://bedtimecycle.com/tools/sleep-debt-tracker.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="btc-nav">
+  <div class="btc-nav-inner">
+    <a href="../index.html" class="btc-logo"><span class="btc-logo-icon">Z</span>Bedtime Cycle</a>
+    <button class="btc-nav-toggle" onclick="document.querySelector('.btc-nav-links').classList.toggle('btc-mobile-open')" aria-label="Toggle menu">☰</button>
+    <ul class="btc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<nav class="btc-breadcrumb" aria-label="Breadcrumb">
+  <a href="../index.html">Home</a><span class="btc-breadcrumb-sep">/</span><a href="./index.html">Tools</a><span class="btc-breadcrumb-sep">/</span><span>Sleep Debt Tracker</span>
+</nav>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_top"><span>Advertisement - tool_top</span></div>
+
+
+<div class="btc-tool-page">
+  <div class="btc-tool-header">
+    <h1>📊 Sleep Debt Tracker</h1>
+    <p>Log your sleep and see your accumulated debt over time. Get a realistic repayment plan and visualize your trends with interactive charts.</p>
+  </div>
+
+  <div class="btc-tool-box">
+    <h4 style="color: var(--btc-primary); margin-bottom: 16px;">Log Today's Sleep</h4>
+    <div class="btc-input-group">
+      <label for="sleepDate">Date</label>
+      <input type="date" id="sleepDate">
+    </div>
+    <div class="btc-input-group">
+      <label for="bedtime">Bedtime</label>
+      <input type="time" id="bedtime" value="23:00">
+    </div>
+    <div class="btc-input-group">
+      <label for="wakeTime">Wake Time</label>
+      <input type="time" id="wakeTime" value="07:00">
+    </div>
+    <div class="btc-input-group">
+      <label for="sleepGoal">Daily Sleep Goal (hours)</label>
+      <input type="number" id="sleepGoal" value="7.5" min="4" max="12" step="0.5">
+    </div>
+    <button class="btc-calculate-btn" onclick="logSleep()">Log Sleep</button>
+    <button class="btc-reset-btn" onclick="resetTracker()">Reset</button>
+  </div>
+
+  <div class="btc-result-box" id="resultBox">
+    <h4>Your Sleep Debt Analysis</h4>
+    <div id="debtResults"></div>
+    <div class="btc-chart-container">
+      <canvas id="debtChart"></canvas>
+    </div>
+    <div class="btc-chart-container" style="margin-top: 16px;">
+      <canvas id="trendChart"></canvas>
+    </div>
+    <div style="margin-top: 20px;">
+      <button class="btc-export-btn" onclick="exportDebt()">📥 Export Data</button>
+      <button class="btc-export-btn" onclick="clearAllData()" style="margin-left: 8px;">🗑 Clear All Data</button>
+    </div>
+  </div>
+
+  <div class="btc-tool-box" id="historyBox">
+    <h4 style="margin-bottom: 16px;">Your Sleep Log</h4>
+    <table class="btc-history-table" id="historyTable">
+      <thead><tr><th>Date</th><th>Bedtime</th><th>Wake</th><th>Actual</th><th>Goal</th><th>Debt</th><th></th></tr></thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_middle"><span>Advertisement - tool_middle</span></div>
+
+
+<section class="btc-section" style="padding-top: 0;">
+  <div class="btc-container">
+    <div class="btc-post-footer-grid">
+      <div>
+        <h3>Related Articles</h3>
+        <a href="../blog/reading-your-sleep-debt.html" class="btc-related-card">
+          <h4>Reading Your Sleep Debt</h4>
+          <p>When to catch up and when to let it go.</p>
+        </a>
+        <a href="../blog/how-i-tracked-847-mornings.html" class="btc-related-card">
+          <h4>How I Tracked 847 Mornings</h4>
+          <p>Three years of data. One spreadsheet.</p>
+        </a>
+      </div>
+      <div>
+        <h3>Recommended Tools</h3>
+        <a href="./sleep-cycle-calculator.html" class="btc-related-card">
+          <h4>🌙 Sleep Cycle Calculator</h4>
+          <p>Calculate optimal bedtimes based on 90-minute cycles.</p>
+        </a>
+        <a href="./bedtime-finder.html" class="btc-related-card">
+          <h4>🕐 Bedtime Finder</h4>
+          <p>Find your ideal bedtime based on current habits.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="btc-ad-slot has-content" data-ad-slot="tool_bottom"><span>Advertisement - tool_bottom</span></div>
+
+
+<footer class="btc-footer">
+  <div class="btc-footer-grid">
+    <div><div class="btc-footer-brand">Bedtime Cycle</div><p class="btc-footer-desc">Science-backed sleep tools built by Dr. Sarah Mitchell in Boulder, Colorado.</p></div>
+    <div><h4>Tools</h4><ul><li><a href="./sleep-cycle-calculator.html">Sleep Cycle Calculator</a></li><li><a href="./bedtime-finder.html">Bedtime Finder</a></li><li><a href="./sleep-debt-tracker.html">Sleep Debt Tracker</a></li></ul></div>
+    <div><h4>Site</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li></ul></div>
+    <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+  </div>
+  <div class="btc-footer-bottom"><p>&copy; 2026 Bedtime Cycle. All rights reserved.</p></div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+// Set default date to today
+document.getElementById('sleepDate').value = new Date().toISOString().split('T')[0];
+
+function logSleep() {
+  const date = document.getElementById('sleepDate').value;
+  const bedtime = document.getElementById('bedtime').value;
+  const wakeTime = document.getElementById('wakeTime').value;
+  const goal = parseFloat(document.getElementById('sleepGoal').value);
+
+  if (!date || !bedtime || !wakeTime) { alert('Please fill in all fields'); return; }
+
+  const [btHour, btMin] = bedtime.split(':').map(Number);
+  const [wtHour, wtMin] = wakeTime.split(':').map(Number);
+  let actualMin = ((wtHour * 60 + wtMin) - (btHour * 60 + btMin) + 24 * 60) % (24 * 60);
+  if (actualMin < 0) actualMin += 24 * 60;
+  const actualHours = actualMin / 60;
+  const debt = goal - actualHours;
+
+  let logs = JSON.parse(localStorage.getItem('btc_sleepLogs') || '[]');
+  logs.push({ date, bedtime, wakeTime, actual: actualHours, goal, debt });
+  logs.sort((a, b) => new Date(a.date) - new Date(b.date));
+  localStorage.setItem('btc_sleepLogs', JSON.stringify(logs));
+
+  renderAnalysis();
+  renderTable();
+}
+
+function renderAnalysis() {
+  const logs = JSON.parse(localStorage.getItem('btc_sleepLogs') || '[]');
+  if (logs.length === 0) { document.getElementById('resultBox').classList.remove('active'); return; }
+
+  document.getElementById('resultBox').classList.add('active');
+
+  const totalDebt = logs.reduce((sum, log) => sum + log.debt, 0);
+  const avgSleep = logs.reduce((sum, log) => sum + log.actual, 0) / logs.length;
+  const avgGoal = logs.reduce((sum, log) => sum + log.goal, 0) / logs.length;
+  const debtDays = logs.filter(l => l.debt > 0).length;
+  const surplusDays = logs.filter(l => l.debt < 0).length;
+
+  let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px;">';
+  html += '<div style="background: var(--btc-bg); border-radius: var(--btc-radius-sm); padding: 16px; text-align: center;"><div style="font-size: 1.8rem; font-weight: 700; color: ' + (totalDebt > 0 ? 'var(--btc-error)' : 'var(--btc-success)') + ';">' + (totalDebt > 0 ? '+' : '') + totalDebt.toFixed(1) + 'h</div><div style="font-size: 0.85rem; color: var(--btc-text-muted);">Total Debt</div></div>';
+  html += '<div style="background: var(--btc-bg); border-radius: var(--btc-radius-sm); padding: 16px; text-align: center;"><div style="font-size: 1.8rem; font-weight: 700; color: var(--btc-primary);">' + avgSleep.toFixed(1) + 'h</div><div style="font-size: 0.85rem; color: var(--btc-text-muted);">Avg Sleep</div></div>';
+  html += '<div style="background: var(--btc-bg); border-radius: var(--btc-radius-sm); padding: 16px; text-align: center;"><div style="font-size: 1.8rem; font-weight: 700; color: var(--btc-primary);">' + debtDays + '</div><div style="font-size: 0.85rem; color: var(--btc-text-muted);">Debt Days</div></div>';
+  html += '<div style="background: var(--btc-bg); border-radius: var(--btc-radius-sm); padding: 16px; text-align: center;"><div style="font-size: 1.8rem; font-weight: 700; color: var(--btc-success);">' + surplusDays + '</div><div style="font-size: 0.85rem; color: var(--btc-text-muted);">Surplus Days</div></div>';
+  html += '</div>';
+
+  if (totalDebt > 0) {
+    const repaymentDays = Math.ceil(totalDebt / 0.5);
+    html += '<div style="background: var(--btc-accent-bg); border: 1px solid var(--btc-accent); border-radius: var(--btc-radius-sm); padding: 16px; margin-bottom: 16px;">';
+    html += '<strong style="color: var(--btc-primary);">Repayment Plan:</strong> You need ' + repaymentDays + ' days of +30 min extra sleep to catch up. Add 15 minutes to bedtime for ' + (repaymentDays * 2) + ' days instead — it is more sustainable.';
+    html += '</div>';
+  }
+
+  document.getElementById('debtResults').innerHTML = html;
+
+  drawDebtChart(logs);
+  drawTrendChart(logs);
+}
+
+function drawDebtChart(logs) {
+  const canvas = document.getElementById('debtChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 250 * dpr;
+  ctx.scale(dpr, dpr);
+
+  const w = rect.width;
+  const h = 250;
+  const padding = 40;
+
+  ctx.clearRect(0, 0, w, h);
+
+  ctx.font = 'bold 14px Inter';
+  ctx.fillStyle = '#1a237e';
+  ctx.textAlign = 'center';
+  ctx.fillText('Sleep Debt per Day', w / 2, 20);
+
+  const maxDebt = Math.max(...logs.map(l => Math.abs(l.debt)), 2);
+  const barW = (w - padding * 2) / logs.length - 4;
+  const maxH = h - padding * 2 - 30;
+
+  logs.forEach((log, i) => {
+    const x = padding + i * (barW + 4);
+    const barH = (Math.abs(log.debt) / maxDebt) * maxH;
+    const y = log.debt > 0 ? h / 2 : h / 2 - barH;
+    ctx.fillStyle = log.debt > 0 ? '#d32f2f' : '#2e7d32';
+    ctx.fillRect(x, y, barW, barH);
+  });
+
+  // Zero line
+  ctx.strokeStyle = '#1a237e';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(padding, h / 2);
+  ctx.lineTo(w - padding, h / 2);
+  ctx.stroke();
+}
+
+function drawTrendChart(logs) {
+  const canvas = document.getElementById('trendChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 250 * dpr;
+  ctx.scale(dpr, dpr);
+
+  const w = rect.width;
+  const h = 250;
+  const padding = 40;
+
+  ctx.clearRect(0, 0, w, h);
+
+  ctx.font = 'bold 14px Inter';
+  ctx.fillStyle = '#1a237e';
+  ctx.textAlign = 'center';
+  ctx.fillText('Actual Sleep vs Goal (hours)', w / 2, 20);
+
+  const maxVal = Math.max(...logs.map(l => Math.max(l.actual, l.goal)), 10);
+  const stepX = (w - padding * 2) / (logs.length - 1 || 1);
+  const maxH = h - padding * 2 - 30;
+
+  // Goal line
+  ctx.strokeStyle = '#ff6f00';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath();
+  const goalY = h - padding - (logs[0].goal / maxVal) * maxH;
+  ctx.moveTo(padding, goalY);
+  ctx.lineTo(w - padding, goalY);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Actual sleep line
+  ctx.strokeStyle = '#1a237e';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  logs.forEach((log, i) => {
+    const x = padding + i * stepX;
+    const y = h - padding - (log.actual / maxVal) * maxH;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // Points
+  logs.forEach((log, i) => {
+    const x = padding + i * stepX;
+    const y = h - padding - (log.actual / maxVal) * maxH;
+    ctx.beginPath();
+    ctx.fillStyle = '#1a237e';
+    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function renderTable() {
+  const logs = JSON.parse(localStorage.getItem('btc_sleepLogs') || '[]');
+  const tbody = document.getElementById('historyBody');
+  tbody.innerHTML = '';
+  logs.slice().reverse().forEach((log, i) => {
+    const tr = document.createElement('tr');
+    const actualIdx = logs.length - 1 - i;
+    tr.innerHTML = '<td>' + log.date + '</td><td>' + log.bedtime + '</td><td>' + log.wakeTime + '</td><td>' + log.actual.toFixed(1) + 'h</td><td>' + log.goal + 'h</td><td style="color: ' + (log.debt > 0 ? 'var(--btc-error)' : 'var(--btc-success)') + ';">' + (log.debt > 0 ? '+' : '') + log.debt.toFixed(1) + 'h</td><td><button onclick="deleteLog(' + actualIdx + ')" style="background: none; border: none; color: var(--btc-error); cursor: pointer;">✕</button></td>';
+    tbody.appendChild(tr);
+  });
+}
+
+function deleteLog(index) {
+  let logs = JSON.parse(localStorage.getItem('btc_sleepLogs') || '[]');
+  logs.splice(index, 1);
+  localStorage.setItem('btc_sleepLogs', JSON.stringify(logs));
+  renderAnalysis();
+  renderTable();
+}
+
+function resetTracker() {
+  document.getElementById('sleepDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('bedtime').value = '23:00';
+  document.getElementById('wakeTime').value = '07:00';
+  document.getElementById('sleepGoal').value = '7.5';
+}
+
+function exportDebt() {
+  const logs = JSON.parse(localStorage.getItem('btc_sleepLogs') || '[]');
+  let csv = 'Date,Bedtime,Wake Time,Actual Sleep,Goal,Debt\n';
+  logs.forEach(l => {
+    csv += l.date + ',' + l.bedtime + ',' + l.wakeTime + ',' + l.actual + ',' + l.goal + ',' + l.debt + '\n';
+  });
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'sleep-debt-data.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function clearAllData() {
+  if (confirm('Delete all sleep logs? This cannot be undone.')) {
+    localStorage.removeItem('btc_sleepLogs');
+    renderAnalysis();
+    renderTable();
+  }
+}
+
+// Load on page open
+renderAnalysis();
+renderTable();
+window.addEventListener('resize', function() {
+  if (document.getElementById('resultBox').classList.contains('active')) renderAnalysis();
+});
+</script>
+</body>
+</html>
